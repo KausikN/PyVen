@@ -1,0 +1,10 @@
+{
+    "PROJECT_NAME": "PyVen",
+    "PROJECT_LINK": "https://github.com/KausikN/PyVen",
+
+    "PROJECT_DESC": "A python importing and packaging tool similar to Maven for Java",
+
+    "PROJECT_README": "README.md",
+
+    "PROJECT_MODES": ["Analyse Repo", "Settings"]
+}

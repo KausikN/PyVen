@@ -5,6 +5,7 @@ A python importing and packaging tool similar to Maven for Java
 # Imports
 import os
 import json
+import importlib
 
 # Main Functions
 def SaveData(data, path):
@@ -34,6 +35,40 @@ def UpdateUniqueDependencies(uD, newDeps):
         if subModPath not in uD_Updated.keys():
             uD_Updated[subModPath] = GetCompressedDep(dep)
     return uD_Updated
+
+def CheckIfPipModule(moduleName, package):
+    try:
+        spam_spec = importlib.util.find_spec(moduleName, package=package)
+        return spam_spec is not None
+    except:
+        return False
+
+def SplitPipModule(moduleStr):
+    newModuleName = None
+    newModuleParent = None
+    moduleHeirarchy = moduleStr.split(".")
+    while len(moduleHeirarchy) > 0:
+        curModuleName = moduleHeirarchy[-1]
+        curModuleParent = ".".join(moduleHeirarchy[:-1])
+        if CheckIfPipModule(curModuleName, curModuleParent):
+            newModuleName = curModuleName
+            newModuleParent = curModuleParent
+            break
+        moduleHeirarchy = moduleHeirarchy[:-1]
+    return newModuleName, newModuleParent
+
+def GetAllLocalRepos(parent_path):
+    repo_list = []
+    for repo in os.listdir(parent_path):
+        if os.path.isdir(os.path.join(parent_path, repo)): # Check if dir
+            # Check if git repo (shud have .git folder)
+            if ".git" in os.listdir(os.path.join(parent_path, repo)):
+                repo_list.append(os.path.join(parent_path, repo).replace("\\", "/"))
+            # Else recurse inside the folder to check for git repos inside it
+            else:
+                repo_list.extend(GetAllLocalRepos(os.path.join(parent_path, repo)))
+    return repo_list
+            
 
 ### Imports Parsers ######################################################################################################
 def ParseImports_Python(code_path):
@@ -97,7 +132,7 @@ def ParseImports_Python(code_path):
             lineImports_Cleaned = []
             importsCode = dirImportsList[1].strip()
             if importsCode == "*" or importDir.startswith("/"):
-                moduleSplitup = importDir.strip(".").split("/")
+                moduleSplitup = importDir.strip("/").split("/")
                 moduleName = moduleSplitup[-1]
                 importDir = "/".join(moduleSplitup[:-1])
                 importData = {
@@ -107,17 +142,37 @@ def ParseImports_Python(code_path):
                 }
                 lineImports_Cleaned.append(importData)
             else:
-                lineImports = importsCode.split(",") # Split into list of modules
-                for imp in lineImports:
-                    asIndex = imp.find(" as ") # Check for 'as' keyword
-                    if asIndex != -1: imp = imp[:asIndex] # Remove string after as key word
-                    imp = imp.strip()
+                # Check if importing functions inside a module - if so only import the main module
+                importDir = importDir.rstrip("/")
+                newImportName, newImportPackage = SplitPipModule(importDir.replace("/", "."))
+                if newImportName is not None:
                     importData = {
                         "parentDir": codeDir,
-                        "subDir": importDir,
-                        "name": imp
+                        "subDir": newImportPackage.replace(".", "/"),
+                        "name": newImportName
                     }
                     lineImports_Cleaned.append(importData)
+                elif os.path.exists(os.path.join(codeDir, importDir + ".py")):
+                    newImportSplit = os.path.split(importDir)
+                    importData = {
+                        "parentDir": codeDir,
+                        "subDir": "/".join(newImportSplit[:-1]),
+                        "name": newImportSplit[-1]
+                    }
+                    lineImports_Cleaned.append(importData)
+                else:
+                    lineImports = importsCode.split(",") # Split into list of modules
+                    for imp in lineImports:
+                        asIndex = imp.find(" as ") # Check for 'as' keyword
+                        if asIndex != -1: imp = imp[:asIndex] # Remove string after as key word
+                        imp = imp.strip()
+
+                        importData = {
+                            "parentDir": codeDir,
+                            "subDir": importDir,
+                            "name": imp
+                        }
+                        lineImports_Cleaned.append(importData)
 
             imports.extend(lineImports_Cleaned)
 
@@ -130,7 +185,7 @@ def DependencyTree_Basic_Python(code_path, level=0, display=False):
 
     codeDir = os.path.dirname(code_path)
     moduleName = os.path.splitext(os.path.basename(code_path))[0]
-    moduleType = "local" # local or inbuilt
+    moduleType = "local" # local file
 
     if display: print(padText + "Module: " + moduleName)
 
@@ -140,7 +195,7 @@ def DependencyTree_Basic_Python(code_path, level=0, display=False):
     for imp in Imports:
         subModulePath = GetModulePath(imp)
         # Check if submodule is inbuilt (through pip install) or local => If file exists == local else inbuilt
-        subModuleType = "local" if os.path.exists(subModulePath) else "inbuilt"
+        subModuleType = "local" if os.path.exists(subModulePath) else ("inbuilt" if CheckIfPipModule(imp["name"], imp["subDir"].replace("/", ".")) else "missing")
         
         i += 1
         if display: print(padText + "[" + str(i) + " / " + str(impCount) + "]" + "|" + subModuleType + "|: " + imp["name"])
@@ -148,7 +203,7 @@ def DependencyTree_Basic_Python(code_path, level=0, display=False):
         subModuleDependencyTree = []
         if subModuleType == "local":
             subModuleDependencyTree = DependencyTree_Basic_Python(subModulePath, level=level+1, display=display)['dependencies']
-        else:
+        elif subModuleType == "inbuilt":
             imp["parentDir"] = "" # No Parent Dir for inbuilt modules
 
         subModule = {
@@ -207,7 +262,7 @@ def DependencyTree_Compressed_Python(code_path, level=0, display=False):
 
     codeDir = os.path.dirname(code_path)
     moduleName = os.path.splitext(os.path.basename(code_path))[0]
-    moduleType = "local" # local or inbuilt
+    moduleType = "local" # local file
 
     if display: print(padText + "Module: " + moduleName)
 
@@ -218,7 +273,7 @@ def DependencyTree_Compressed_Python(code_path, level=0, display=False):
     for imp in Imports:
         subModulePath = GetModulePath(imp)
         # Check if submodule is inbuilt (through pip install) or local => If file exists == local else inbuilt
-        subModuleType = "local" if os.path.exists(subModulePath) else "inbuilt"
+        subModuleType = "local" if os.path.exists(subModulePath) else ("inbuilt" if CheckIfPipModule(imp["name"], imp["subDir"].replace("/", ".")) else "missing")
         if subModuleType == "inbuilt":
             imp["parentDir"] = ""
             subModulePath = GetModulePath(imp)
@@ -232,7 +287,8 @@ def DependencyTree_Compressed_Python(code_path, level=0, display=False):
                 depCleaned = DependencyTree_Compressed_Python(subModulePath, level=level+1, display=display)
             else:
                 depCleaned["type"] = subModuleType
-                depCleaned["parentDir"] = "" # No Parent Dir for inbuilt modules
+                if subModuleType == "inbuilt":
+                    depCleaned["parentDir"] = "" # No Parent Dir for inbuilt modules
                 depCleaned["dependencies"] = [] # No dependencies for inbuilt modules
                 depCleaned["dependencyModules"] = {}
             depCleaned["subDir"] = imp["subDir"]
@@ -273,17 +329,25 @@ def Repo_GenerateTree(repo_path, userName="KausikN", display=False):
         moduleType = "local" # local as file exists
 
         Imports = ParseImports_Python(f)
-        ImportPaths = [GetModulePath(imp, absolute=False) for imp in Imports]
+        ImportPaths = []
+        for imp in Imports:
+            absPath = GetModulePath(imp, absolute=True)
+            path = GetModulePath(imp, absolute=False)
+            if os.path.exists(absPath): 
+                path = os.path.join(subDir, path).replace("\\", "/")
+            ImportPaths.append(path)
 
+        moduleLink = "https://github.com/" + userName + "/" + repoName + "/blob/master/" + subDir + "/" + moduleName + ".py"
+        if subDir == "":
+            moduleLink = "https://github.com/" + userName + "/" + repoName + "/blob/master/" + moduleName + ".py"
         Module = {
             "name": moduleName,
             "type": moduleType,
-            "link": "https://github.com/" + userName + "/" + repoName + "/blob/master/" + subDir + "/" + moduleName + ".py",
+            "link": moduleLink,
             "parentDir": repo_path,
             "subDir": subDir,
             "dependencies": ImportPaths,
         }
-
         uniqueModules[GetModulePath(Module, absolute=False)] = Module
         importedModulePaths.extend(ImportPaths)
 
@@ -293,12 +357,13 @@ def Repo_GenerateTree(repo_path, userName="KausikN", display=False):
         if path not in uniqueModules.keys():
             subDir = os.path.split(path)[0].replace("\\", "/").strip("/")
             moduleName = os.path.splitext(os.path.basename(path))[0]
-            moduleType = "inbuilt"
+            moduleType = "inbuilt" if CheckIfPipModule(moduleName, subDir.replace("/", ".")) else "missing"
+            parentDir = repo_path if moduleType == "inbuilt" else ""
             Module = {
                 "name": moduleName,
                 "type": moduleType,
                 "link": "", # No Link for inbuilt modules
-                "parentDir": "",
+                "parentDir": parentDir,
                 "subDir": subDir,
                 "dependencies": [],
             }
@@ -315,15 +380,20 @@ def Repo_GenerateTree(repo_path, userName="KausikN", display=False):
 ##########################################################################################################################
 
 # Driver Code
-# Params
-userName = "KausikN"
-repoPath = "E:/Github Codes and Projects/Projects/VidFX/"
-savePath = "DependencyData/PyVenTree_VidFX.json"
-# Params
+# # Params
+# userName = "KausikN"
+# repoPath = "E:/Github Codes and Projects/Projects/VidFX/"
+# savePath = "DependencyData/PyVenTree_VidFX.json"
+# # Params
 
-# RunCode
-print(repoPath)
-print("Computing Repo Tree...")
-Repo = Repo_GenerateTree(repoPath, userName=userName, display=True)
+# # print(CheckIfPipModule("semantic_segmentation", "pixellib.semantic"))
+# # print(CheckIfPipModule("semantic", "pixellib"))
+# # print(CheckIfPipModule("pixellib", ""))
+# # quit()
 
-SaveData(Repo, savePath)
+# # RunCode
+# print(repoPath)
+# print("Computing Repo Tree...")
+# Repo = Repo_GenerateTree(repoPath, userName=userName, display=True)
+
+# SaveData(Repo, savePath)
