@@ -1,0 +1,9 @@
+{
+    "common": [
+        "Default/.pyven/features.json"
+    ],
+    "special": {
+        "choiceBased": {},
+        "checkBased": {}
+    }
+}

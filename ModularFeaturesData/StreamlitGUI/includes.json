@@ -1,0 +1,38 @@
+{
+    "common": [
+        "Version_WithCache/StreamLitGUI/UIConfig.json",
+        "Version_WithCache/Procfile",
+        "Version_WithCache/requirements.txt",
+        "Version_WithCache/setup.sh"
+    ],
+    "special": {
+        "choiceBased": {
+            "Cached": {
+                "label": "Cached",
+                "choices": [
+                    {
+                        "name": "With Cache",
+                        "paths": [
+                            "Version_WithCache/StreamLitGUI/CacheData/",
+                            "Version_WithCache/app.py"
+                        ]
+                    },
+                    {
+                        "name": "Without Cache",
+                        "paths": [
+                            "Version_WithoutCache/app.py"
+                        ]
+                    }
+                ]   
+            }
+        },
+        "checkBased": {
+            "StartUICheck": {
+                "label": "Add StartUI executable?",
+                "paths": [
+                    "Version_WithCache/StartUI.sh"
+                ]
+            }
+        }
+    }
+}

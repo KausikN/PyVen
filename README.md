@@ -1,5 +1,5 @@
 # PyVen
- A python importing and packaging tool similar to Maven for Java
+ A python importing and packaging tool for adding and removing common modules and features to other repositories.
 
 # GUI
 

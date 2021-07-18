@@ -6,5 +6,5 @@
 
     "PROJECT_README": "README.md",
 
-    "PROJECT_MODES": ["Analyse Repo", "Settings"]
+    "PROJECT_MODES": ["Analyse Repo", "Add Features to Repo", "Settings"]
 }

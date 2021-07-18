@@ -12,6 +12,8 @@ import streamlit as st
 import json
 
 import PyVen
+import ModularFeatures
+
 # Main Vars
 config = json.load(open('./StreamLitGUI/UIConfig.json', 'r'))
 
@@ -44,10 +46,14 @@ def HomePage():
 #############################################################################################################################
 # Repo Based Vars
 DEFAULT_SAVEPATH_JSON = 'DependencyData/Modules.json'
+FEATURES_PATH = 'ModularFeaturesData/'
 CACHE_PATH = "StreamLitGUI/CacheData/Cache.json"
+
+DEFAULT_FEATURE_NAME_PYVENSTARTER = "PyVenStarter"
 
 # Util Vars
 CACHE = {}
+FEATURES = {}
 
 # Util Functions
 def Hex_to_RGB(val):
@@ -80,6 +86,18 @@ def LoadCache():
 def SaveCache():
     global CACHE
     json.dump(CACHE, open(CACHE_PATH, 'w'), indent=4)
+
+def LoadFeatures():
+    global FEATURES
+    for f in os.listdir(FEATURES_PATH):
+        FEATURES[f] = os.path.join(FEATURES_PATH, f).replace("\\", "/")
+
+def LoadPyVenFeaturesMetadata(repo_path):
+    FEATURES_DATA = json.load(open(os.path.join(repo_path, ".pyven/features.json").replace("\\", "/"), 'r'))
+    return FEATURES_DATA
+
+def SavePyVenFeaturesMetadata(repo_path, FEATURES_DATA):
+    json.dump(FEATURES_DATA, open(os.path.join(repo_path, ".pyven/features.json").replace("\\", "/"), 'w'), indent=4)
 
 # Main Functions
 
@@ -131,8 +149,44 @@ def UI_DisplayRepoTreeData(repo):
         deps = [repo["modules"][key]["name"] for key in USEINPUT_Module["dependencies"]]
         col2.markdown(', '.join(deps))
 
+def UI_GetFeatureParams(feature_path, nCols=3):
+    includes = json.load(open(os.path.join(feature_path, "includes.json").replace("\\", "/"), 'r'))
+    specialInputs = {"choiceBased": {}, "checkBased": {}}
+    # Choice Based
+    choiceBasedData = includes["special"]["choiceBased"]
+    nChoiceParams = len(choiceBasedData.keys())
+    choiceBasedData_Labels = list(choiceBasedData.keys())
+    params_done = 0
+    while(params_done < nChoiceParams):
+        params_todo = min(nCols, nChoiceParams-params_done)
+        cols = st.beta_columns(params_todo)
+        for i in range(params_todo):
+            choiceDataKey = choiceBasedData_Labels[params_done + i]
+            choiceNames = GetNames(choiceBasedData[choiceDataKey]["choices"])
+            inp = cols[i].selectbox(choiceBasedData[choiceDataKey]["label"], choiceNames)
+            inp_index = choiceNames.index(inp)
+            specialInputs["choiceBased"][choiceDataKey] = inp_index
+        params_done += params_todo
+    # Check Based
+    checkBasedData = includes["special"]["checkBased"]
+    nCheckParams = len(checkBasedData.keys())
+    checkBasedData_Labels = list(checkBasedData.keys())
+    params_done = 0
+    while(params_done < nCheckParams):
+        params_todo = min(nCols, nCheckParams-params_done)
+        cols = st.beta_columns(params_todo)
+        for i in range(params_todo):
+            checkDataKey = checkBasedData_Labels[params_done + i]
+            inp = st.checkbox(checkBasedData[checkDataKey]["label"])
+            specialInputs["checkBased"][checkDataKey] = inp
+        params_done += params_todo
+    
+    return specialInputs
+
 # Repo Based Functions
 def analyse_repo():
+    global FEATURES
+
     # Title
     st.header("Analyse Local Repo")
 
@@ -153,6 +207,64 @@ def analyse_repo():
 
     # Display Outputs
     UI_DisplayRepoTreeData(REPO_TREE)
+
+    # Check if PyVen Features Added
+    st.markdown("## Features Added")
+    ADDED_FEATURES = ModularFeatures.ModularFeature_Check(REPO_PATH)
+    if ADDED_FEATURES is None:
+        st.markdown("Repo not initialsed with PyVen.")
+    else:
+        USERINPUT_AddedFeaturesChoice = st.selectbox("Added Features", ADDED_FEATURES)
+
+def add_features_to_repo():
+    global FEATURES
+
+    # Title
+    st.header("Add Features to Repo")
+
+    LoadCache()
+    LoadFeatures()
+    REPO_NAMES = GetNames(CACHE["GIT_REPOS"])
+    REPO_DATAS = CACHE["GIT_REPOS"]
+
+    # Load Inputs
+    USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES)
+    if USERINPUT_RepoChoiceName == "Select Repo": return
+    USERINPUT_RepoChoice = REPO_DATAS[REPO_NAMES.index(USERINPUT_RepoChoiceName)]
+    REPO_PATH = USERINPUT_RepoChoice["path"]
+    REPO_NAME = USERINPUT_RepoChoice["name"]
+
+    # Check if PyVen Starter Added
+    if ".pyven" not in os.listdir(REPO_PATH):
+        if st.button("Initialise PyVen for the Repo"):
+            USERINPUT_FeatureChoice = FEATURES[DEFAULT_FEATURE_NAME_PYVENSTARTER]
+            LoaderWidget = st.empty()
+            ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, {"choiceBased": {}, "checkBased": {}}, LoaderWidget)
+            LoaderWidget.markdown("Repo initialised with PyVen!")
+        return
+
+    USERINPUT_FeatureChoiceName = st.selectbox("Select Feature", ["Select Feature"] + list(FEATURES.keys()))
+    if USERINPUT_FeatureChoiceName == "Select Feature": return
+    USERINPUT_FeatureChoice = FEATURES[USERINPUT_FeatureChoiceName]
+
+    specialInputs = UI_GetFeatureParams(USERINPUT_FeatureChoice)
+
+    # Process Inputs
+    if st.button("Add"):
+        LoaderWidget = st.empty()
+        ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, specialInputs, LoaderWidget)
+        LoaderWidget.markdown("Feature Added!")
+
+        # Save PyVen Metadata for the repo
+        FEATURES_DATA = LoadPyVenFeaturesMetadata(REPO_PATH)
+        FEATURES_DATA["added_features"][USERINPUT_FeatureChoiceName] = {
+            "name": USERINPUT_FeatureChoiceName,
+            "special": specialInputs
+        }
+        SavePyVenFeaturesMetadata(REPO_PATH, FEATURES_DATA)
+        
+        # Display Outputs
+
 
 def settings():
     global CACHE
