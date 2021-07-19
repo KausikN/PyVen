@@ -38,8 +38,9 @@ def UpdateUniqueDependencies(uD, newDeps):
 
 def CheckIfPipModule(moduleName, package):
     try:
-        spam_spec = importlib.util.find_spec(moduleName, package=package)
-        return spam_spec is not None
+        mod_spec_pkg = importlib.util.find_spec(moduleName, package=package)
+        mod_spec_direct = importlib.util.find_spec(package + "." + moduleName, package="")
+        return (mod_spec_pkg is not None) or (mod_spec_direct is not None)
     except:
         return False
 
@@ -308,7 +309,7 @@ def DependencyTree_Compressed_Python(code_path, level=0, display=False):
 ##########################################################################################################################
 
 ### REPO LEVEL PYVEN #####################################################################################################
-def Repo_GenerateTree(repo_path, userName="KausikN", display=False):
+def Repo_FindModules(repo_path, userName="KausikN", display=False):
     repoName = repo_path.rstrip("/").split("/")[-1]
 
     CodeFiles = []
@@ -394,6 +395,6 @@ def Repo_GenerateTree(repo_path, userName="KausikN", display=False):
 # # RunCode
 # print(repoPath)
 # print("Computing Repo Tree...")
-# Repo = Repo_GenerateTree(repoPath, userName=userName, display=True)
+# Repo = Repo_FindModules(repoPath, userName=userName, display=True)
 
 # SaveData(Repo, savePath)

@@ -1,0 +1,11 @@
+{
+    "added_features": {
+        "PyVenStarter": {
+            "name": "PyVenStarter",
+            "special": {
+                "choiceBased": {},
+                "checkBased": {}
+            }
+        }
+    }
+}

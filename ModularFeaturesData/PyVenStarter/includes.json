@@ -1,6 +1,6 @@
 {
     "common": [
-        "Default/.pyven/features.json"
+        "Default/.pyven/"
     ],
     "special": {
         "choiceBased": {},

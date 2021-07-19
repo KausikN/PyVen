@@ -102,7 +102,13 @@ def LoadPyVenFeaturesMetadata(repo_path):
 def SavePyVenFeaturesMetadata(repo_path, FEATURES_DATA):
     json.dump(FEATURES_DATA, open(JoinPath(repo_path, ".pyven/features.json"), 'w'), indent=4)
 
+def SavePyVenModulesMetadata(repo_path, MODULES_DATA):
+    json.dump(MODULES_DATA, open(JoinPath(repo_path, ".pyven/modules.json"), 'w'), indent=4)
+
 # Main Functions
+def RebuildModules(REPO_PATH):
+    Modules = PyVen.Repo_FindModules(REPO_PATH)
+    SavePyVenModulesMetadata(REPO_PATH, Modules)
 
 
 # UI Functions
@@ -188,6 +194,26 @@ def UI_GetFeatureParams(feature_path, defaults=None, nCols=3):
     
     return specialInputs
 
+def UI_CheckPyVenInit(REPO_PATH):
+    if ".pyven" not in os.listdir(REPO_PATH):
+        InitButton = st.empty()
+        if InitButton.button("Initialise PyVen for the Repo"):
+            # Add PyVen Starter Feature
+            USERINPUT_FeatureChoice = FEATURES[DEFAULT_FEATURE_NAME_PYVENSTARTER]
+            LoaderWidget = st.empty()
+            ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, {"choiceBased": {}, "checkBased": {}}, LoaderWidget)
+
+            # Update Modules in .pyven
+            RebuildModules(REPO_PATH)
+            
+            LoaderWidget.markdown("Repo initialised with PyVen!")
+            InitButton.markdown("")
+            return True
+        else:
+            return False
+    return True
+    
+
 # Repo Based Functions
 def analyse_repo():
     global FEATURES
@@ -200,6 +226,8 @@ def analyse_repo():
     REPO_DATAS = CACHE["GIT_REPOS"]
 
     # Load Inputs
+    USERINPUT_RebuildModules = st.sidebar.button("Rebuild Modules")
+
     USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES)
     if USERINPUT_RepoChoiceName == "Select Repo": return
     USERINPUT_RepoChoice = REPO_DATAS[REPO_NAMES.index(USERINPUT_RepoChoiceName)]
@@ -208,7 +236,7 @@ def analyse_repo():
     # Load Repo
     REPO_PATH = USERINPUT_RepoChoice["path"]
     REPO_NAME = USERINPUT_RepoChoice["name"]
-    REPO_TREE = PyVen.Repo_GenerateTree(REPO_PATH)
+    REPO_TREE = PyVen.Repo_FindModules(REPO_PATH)
 
     # Display Outputs
     UI_DisplayRepoTreeData(REPO_TREE)
@@ -220,6 +248,10 @@ def analyse_repo():
         st.markdown("Repo not initialsed with PyVen.")
     else:
         USERINPUT_AddedFeaturesChoice = st.selectbox("Added Features", ADDED_FEATURES)
+
+    if USERINPUT_RebuildModules:
+        RebuildModules(REPO_PATH)
+        st.markdown("Rebuilt Modules!")
 
 def edit_repo_features():
     global FEATURES
@@ -234,6 +266,7 @@ def edit_repo_features():
 
     # Load Inputs
     USERINPUT_SafeUpdate = st.sidebar.checkbox("Safe Update/Remove", True)
+    USERINPUT_RebuildModules = st.sidebar.button("Rebuild Modules")
 
     USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES)
     if USERINPUT_RepoChoiceName == "Select Repo": return
@@ -241,17 +274,8 @@ def edit_repo_features():
     REPO_PATH = USERINPUT_RepoChoice["path"]
     REPO_NAME = USERINPUT_RepoChoice["name"]
 
-    # Check if PyVen Starter Added
-    if ".pyven" not in os.listdir(REPO_PATH):
-        InitButton = st.empty()
-        if InitButton.button("Initialise PyVen for the Repo"):
-            USERINPUT_FeatureChoice = FEATURES[DEFAULT_FEATURE_NAME_PYVENSTARTER]
-            LoaderWidget = st.empty()
-            ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, {"choiceBased": {}, "checkBased": {}}, LoaderWidget)
-            LoaderWidget.markdown("Repo initialised with PyVen!")
-            InitButton.markdown("")
-        else:
-            return
+    # Check if PyVen Initialised in repo
+    if not UI_CheckPyVenInit(REPO_PATH): return
 
     USERINPUT_FeatureChoiceName = st.selectbox("Select Feature", ["Select Feature"] + list(FEATURES.keys()))
     if USERINPUT_FeatureChoiceName == "Select Feature": return
@@ -269,7 +293,6 @@ def edit_repo_features():
         ButtonName = "Update"
         featureExists = True
         # specialInputs_Default = added_features_data[USERINPUT_FeatureChoiceName]["special"] # Commented as this messes up the UI
-
 
     specialInputs = UI_GetFeatureParams(USERINPUT_FeatureChoice, specialInputs_Default)
 
@@ -294,6 +317,7 @@ def edit_repo_features():
         featureExists = True
         ButtonName = "Update"
         bcol1.button(ButtonName + " Feature", key="BU")
+        USERINPUT_RebuildModules = True
     
     if featureExists:
         if bcol2.button("Remove Feature"):
@@ -308,6 +332,11 @@ def edit_repo_features():
             ButtonName = "Add"
             bcol1.button(ButtonName + " Feature", key="BA2")
             bcol2.markdown("")
+            USERINPUT_RebuildModules = True
+
+    if USERINPUT_RebuildModules:
+        RebuildModules(REPO_PATH)
+        st.markdown("Rebuilt Modules!")
 
 
 def settings():

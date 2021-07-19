@@ -1,0 +1,282 @@
+{
+    "name": "PyVen",
+    "repoLink": "https://github.com/KausikN/PyVen",
+    "localPath": "E:/Github Codes and Projects/Projects/PyVen",
+    "modules": {
+        "app.py": {
+            "name": "app",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/app.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "",
+            "dependencies": [
+                "os.py",
+                "cv2.py",
+                "pickle.py",
+                "functools.py",
+                "numpy.py",
+                "streamlit.py",
+                "json.py",
+                "PyVen.py",
+                "ModularFeatures.py"
+            ]
+        },
+        "ModularFeatures.py": {
+            "name": "ModularFeatures",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeatures.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "",
+            "dependencies": [
+                "os.py",
+                "json.py",
+                "shutil.py",
+                "streamlit.py"
+            ]
+        },
+        "PyVen.py": {
+            "name": "PyVen",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/PyVen.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "",
+            "dependencies": [
+                "os.py",
+                "json.py",
+                "importlib.py"
+            ]
+        },
+        "Examples/D.py": {
+            "name": "D",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/Examples/D.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "Examples",
+            "dependencies": [
+                "Examples/Utils/B.py"
+            ]
+        },
+        "Examples/Test.py": {
+            "name": "Test",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Test.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "Examples",
+            "dependencies": [
+                "os.py",
+                "sys.py",
+                "time.py",
+                "pygame.py",
+                "random.py",
+                "numpy.py",
+                "matplotlib.pyplot.py",
+                "scipy/optimize.py",
+                "scipy/stats.py",
+                "Examples/Utils/Haha/A.py",
+                "Examples/Utils/B.py",
+                "Examples/Utils/C.py",
+                "Examples/D.py"
+            ]
+        },
+        "Examples/Utils/B.py": {
+            "name": "B",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/B.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "Examples/Utils",
+            "dependencies": [
+                "cv2.py",
+                "matplotlib.py",
+                "Examples/Utils/C.py"
+            ]
+        },
+        "Examples/Utils/C.py": {
+            "name": "C",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/C.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "Examples/Utils",
+            "dependencies": []
+        },
+        "Examples/Utils/__init__.py": {
+            "name": "__init__",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/__init__.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "Examples/Utils",
+            "dependencies": []
+        },
+        "Examples/Utils/Haha/A.py": {
+            "name": "A",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/Haha/A.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "Examples/Utils/Haha",
+            "dependencies": [
+                "os.py",
+                "numpy.py",
+                "matplotlib.pyplot.py"
+            ]
+        },
+        "ModularFeaturesData/StreamlitGUI/Version_WithCache/app.py": {
+            "name": "app",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeaturesData/StreamlitGUI/Version_WithCache/app.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "ModularFeaturesData/StreamlitGUI/Version_WithCache",
+            "dependencies": [
+                "os.py",
+                "streamlit.py",
+                "json.py"
+            ]
+        },
+        "ModularFeaturesData/StreamlitGUI/Version_WithoutCache/app.py": {
+            "name": "app",
+            "type": "local",
+            "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeaturesData/StreamlitGUI/Version_WithoutCache/app.py",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "ModularFeaturesData/StreamlitGUI/Version_WithoutCache",
+            "dependencies": [
+                "os.py",
+                "streamlit.py",
+                "json.py"
+            ]
+        },
+        "scipy/stats.py": {
+            "name": "stats",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "scipy",
+            "dependencies": []
+        },
+        "random.py": {
+            "name": "random",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "matplotlib.pyplot.py": {
+            "name": "matplotlib.pyplot",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "importlib.py": {
+            "name": "importlib",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "json.py": {
+            "name": "json",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "time.py": {
+            "name": "time",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "functools.py": {
+            "name": "functools",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "matplotlib.py": {
+            "name": "matplotlib",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "pickle.py": {
+            "name": "pickle",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "streamlit.py": {
+            "name": "streamlit",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "scipy/optimize.py": {
+            "name": "optimize",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "scipy",
+            "dependencies": []
+        },
+        "numpy.py": {
+            "name": "numpy",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "shutil.py": {
+            "name": "shutil",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "cv2.py": {
+            "name": "cv2",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "pygame.py": {
+            "name": "pygame",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "os.py": {
+            "name": "os",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "sys.py": {
+            "name": "sys",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        }
+    }
+}

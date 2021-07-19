@@ -1,5 +1,2 @@
 streamlit
-numpy
-matplotlib
 opencv-python-headless
-tqdm
