@@ -58,7 +58,29 @@ def GetVersionSplitPath(path):
     fileHeirarchy = '/'.join(versionSplit[1:])
     return [versionDir, fileHeirarchy]
 
-def CascadeCreatePath(path, save_parent, save_path, overwrite=True):
+def CheckDataSame(src, dst):
+    print("\n")
+    print([src, dst])
+    if (not os.path.exists(src)) or (not os.path.exists(dst)):
+        return False
+    
+    if os.path.isfile(src) and os.path.isfile(dst):
+        return (open(src, 'r').read() == open(dst, 'r').read())
+    elif os.path.isdir(src) and os.path.isdir(dst):
+        for root, dirs, files in os.walk(src):
+            for file in files:
+                src_file = JoinPath(root, file)
+                dst_file = JoinPath(dst, src_file.replace(src, "", 1))
+                print([src_file, dst_file])
+                if (not os.path.exists(dst_file)):
+                    return False
+                if os.path.isfile(src_file) and os.path.isfile(dst_file):
+                    if (open(src_file, 'r').read() != open(dst_file, 'r').read()):
+                        return False
+        return True
+    return False
+
+def CascadeCopyPath(path, save_parent, save_path, overwrite=True):
     if not overwrite:
         if os.path.exists(JoinPath(save_parent, save_path)):
             return
@@ -69,11 +91,31 @@ def CascadeCreatePath(path, save_parent, save_path, overwrite=True):
     saveSplit = save_path.split("/")
     saveDirPath = '/'.join(saveSplit[:-1]).rstrip("/")
     saveFile = saveSplit[-1]
-    if os.path.isdir(path):
-        saveDirPath = JoinPath(saveDirPath, saveFile)
     os.makedirs(JoinPath(save_parent, saveDirPath), exist_ok=True)
     if os.path.isfile(path):
         shutil.copy(path, JoinPath(save_parent, save_path))
+    elif os.path.isdir(path):
+        shutil.copytree(path, JoinPath(save_parent, save_path), dirs_exist_ok=True)
+
+def CascadeRemovePath(path, remove_parent, remove_path, checkEdited=False):
+    if checkEdited: # If edited dont delete
+        if not CheckDataSame(path, JoinPath(remove_parent, remove_path)):
+            return
+    remove_path = remove_path.replace("\\", "/")
+    remove_parent = remove_parent.replace("\\", "/")
+    full_remove_path = JoinPath(remove_parent, remove_path)
+    remove_dirs = os.path.split(remove_path)[0]
+
+    if os.path.exists(full_remove_path):
+        if os.path.isfile(full_remove_path):
+            os.remove(full_remove_path)
+        elif os.path.isdir(full_remove_path):
+            shutil.rmtree(full_remove_path)
+        if not (remove_dirs.strip() == ""):
+            try:
+                os.removedirs(JoinPath(remove_parent, remove_dirs))
+            except:
+                pass
 
 # Main Functions
 def ModularFeature_Check(repo_path):
@@ -96,7 +138,7 @@ def ModularFeature_Load(feature_path):
     }
     return FEATURE
 
-def ModularFeature_Add(feature_path, add_repo_path, special_includes_inputs, DisplayWidget=None):
+def ModularFeature_Add(feature_path, add_repo_path, special_includes_inputs, DisplayWidget=None, SafeMode=False):
     FEATURE = ModularFeature_Load(feature_path)
     # Add Common Files
     i=0
@@ -105,7 +147,7 @@ def ModularFeature_Add(feature_path, add_repo_path, special_includes_inputs, Dis
         if DisplayWidget is not None: DisplayWidget.markdown("Adding Common Files: " + "[" + str(i) + " / " + str(len(FEATURE["includes"]["common"])) + "]")
         load_f = JoinPath(feature_path, f)
         save_f = GetVersionSplitPath(f)[1]
-        CascadeCreatePath(load_f, add_repo_path, save_f)
+        CascadeCopyPath(load_f, add_repo_path, save_f, overwrite=not SafeMode)
     # Add Special Files
     to_add_paths = []
     # Choice Based
@@ -131,7 +173,56 @@ def ModularFeature_Add(feature_path, add_repo_path, special_includes_inputs, Dis
     for load_f, save_f in to_add_paths:
         i+=1
         if DisplayWidget is not None: DisplayWidget.markdown("Adding Special Files: " + "[" + str(i) + " / " + str(len(to_add_paths)) + "]")
-        CascadeCreatePath(load_f, add_repo_path, save_f)
+        CascadeCopyPath(load_f, add_repo_path, save_f, overwrite=not SafeMode)
+
+def ModularFeature_Remove(feature_path, remove_repo_path, DisplayWidget=None, SafeMode=False):
+    feature_name = feature_path.split("/")[-1]
+    remove_repo_name = remove_repo_path.split("/")[-1]
+    FEATURE = ModularFeature_Load(feature_path)
+
+    # Get Special Inputs used
+    features_pyven_repo_path = JoinPath(remove_repo_path, ".pyven/features.json")
+    added_features_data = json.load(open(features_pyven_repo_path, 'r'))["added_features"]
+    if feature_name not in added_features_data.keys():
+        if DisplayWidget is not None: DisplayWidget.markdown("Feature " + feature_name + " not added to " + remove_repo_name + ".")
+        return
+    special_includes_inputs = added_features_data[feature_name]["special"]
+
+    # Remove Common Files
+    i=0
+    for f in FEATURE["includes"]["common"]:
+        i+=1
+        if DisplayWidget is not None: DisplayWidget.markdown("Removing Common Files: " + "[" + str(i) + " / " + str(len(FEATURE["includes"]["common"])) + "]")
+        load_f = JoinPath(feature_path, f)
+        saved_f = GetVersionSplitPath(f)[1]
+        CascadeRemovePath(load_f, remove_repo_path, saved_f, checkEdited=SafeMode)
+
+    # Remove Special Files
+    to_remove_paths = []
+    # Choice Based
+    for choiceDataKey in FEATURE["includes"]["special"]["choiceBased"].keys():
+        choiceData = FEATURE["includes"]["special"]["choiceBased"][choiceDataKey]
+        choiceIndex = special_includes_inputs["choiceBased"][choiceDataKey]
+        fs = choiceData["choices"][choiceIndex]["paths"]
+        for f in fs:
+            load_f = JoinPath(feature_path, f)
+            save_f = GetVersionSplitPath(f)[1]
+            to_remove_paths.append([load_f, save_f])
+    # Check Based
+    for checkDataKey in FEATURE["includes"]["special"]["checkBased"].keys():
+        checkData = FEATURE["includes"]["special"]["checkBased"][checkDataKey]
+        if special_includes_inputs["checkBased"][checkDataKey]:
+            fs = checkData["paths"]
+            for f in fs:
+                load_f = JoinPath(feature_path, f)
+                save_f = GetVersionSplitPath(f)[1]
+                to_remove_paths.append([load_f, save_f])
+    
+    i=0
+    for load_f, save_f in to_remove_paths:
+        i+=1
+        if DisplayWidget is not None: DisplayWidget.markdown("Removing Special Files: " + "[" + str(i) + " / " + str(len(to_remove_paths)) + "]")
+        CascadeRemovePath(load_f, remove_repo_path, save_f, checkEdited=SafeMode)
 
 
 # Driver Code

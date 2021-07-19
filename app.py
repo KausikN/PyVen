@@ -64,6 +64,9 @@ def Hex_to_RGB(val):
 def RGB_to_Hex(rgb):
     return "#{:02x}{:02x}{:02x}".format(rgb[0], rgb[1], rgb[2])
 
+def JoinPath(*ops):
+    return os.path.join(*ops).replace("\\", "/")
+
 def GetNames(data):
     names = []
     for d in data:
@@ -90,14 +93,14 @@ def SaveCache():
 def LoadFeatures():
     global FEATURES
     for f in os.listdir(FEATURES_PATH):
-        FEATURES[f] = os.path.join(FEATURES_PATH, f).replace("\\", "/")
+        FEATURES[f] = JoinPath(FEATURES_PATH, f)
 
 def LoadPyVenFeaturesMetadata(repo_path):
-    FEATURES_DATA = json.load(open(os.path.join(repo_path, ".pyven/features.json").replace("\\", "/"), 'r'))
+    FEATURES_DATA = json.load(open(JoinPath(repo_path, ".pyven/features.json"), 'r'))
     return FEATURES_DATA
 
 def SavePyVenFeaturesMetadata(repo_path, FEATURES_DATA):
-    json.dump(FEATURES_DATA, open(os.path.join(repo_path, ".pyven/features.json").replace("\\", "/"), 'w'), indent=4)
+    json.dump(FEATURES_DATA, open(JoinPath(repo_path, ".pyven/features.json"), 'w'), indent=4)
 
 # Main Functions
 
@@ -149,8 +152,8 @@ def UI_DisplayRepoTreeData(repo):
         deps = [repo["modules"][key]["name"] for key in USEINPUT_Module["dependencies"]]
         col2.markdown(', '.join(deps))
 
-def UI_GetFeatureParams(feature_path, nCols=3):
-    includes = json.load(open(os.path.join(feature_path, "includes.json").replace("\\", "/"), 'r'))
+def UI_GetFeatureParams(feature_path, defaults=None, nCols=3):
+    includes = json.load(open(JoinPath(feature_path, "includes.json"), 'r'))
     specialInputs = {"choiceBased": {}, "checkBased": {}}
     # Choice Based
     choiceBasedData = includes["special"]["choiceBased"]
@@ -163,7 +166,8 @@ def UI_GetFeatureParams(feature_path, nCols=3):
         for i in range(params_todo):
             choiceDataKey = choiceBasedData_Labels[params_done + i]
             choiceNames = GetNames(choiceBasedData[choiceDataKey]["choices"])
-            inp = cols[i].selectbox(choiceBasedData[choiceDataKey]["label"], choiceNames)
+            defaultVal = 0 if defaults is None else defaults["choiceBased"][choiceDataKey]
+            inp = cols[i].selectbox(choiceBasedData[choiceDataKey]["label"], choiceNames, index=defaultVal)
             inp_index = choiceNames.index(inp)
             specialInputs["choiceBased"][choiceDataKey] = inp_index
         params_done += params_todo
@@ -177,7 +181,8 @@ def UI_GetFeatureParams(feature_path, nCols=3):
         cols = st.beta_columns(params_todo)
         for i in range(params_todo):
             checkDataKey = checkBasedData_Labels[params_done + i]
-            inp = st.checkbox(checkBasedData[checkDataKey]["label"])
+            defaultVal = False if defaults is None else defaults["checkBased"][checkDataKey]
+            inp = st.checkbox(checkBasedData[checkDataKey]["label"], defaultVal)
             specialInputs["checkBased"][checkDataKey] = inp
         params_done += params_todo
     
@@ -216,11 +221,11 @@ def analyse_repo():
     else:
         USERINPUT_AddedFeaturesChoice = st.selectbox("Added Features", ADDED_FEATURES)
 
-def add_features_to_repo():
+def edit_repo_features():
     global FEATURES
 
     # Title
-    st.header("Add Features to Repo")
+    st.header("Edit Repo Features")
 
     LoadCache()
     LoadFeatures()
@@ -228,6 +233,8 @@ def add_features_to_repo():
     REPO_DATAS = CACHE["GIT_REPOS"]
 
     # Load Inputs
+    USERINPUT_SafeUpdate = st.sidebar.checkbox("Safe Update/Remove", True)
+
     USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES)
     if USERINPUT_RepoChoiceName == "Select Repo": return
     USERINPUT_RepoChoice = REPO_DATAS[REPO_NAMES.index(USERINPUT_RepoChoiceName)]
@@ -236,34 +243,71 @@ def add_features_to_repo():
 
     # Check if PyVen Starter Added
     if ".pyven" not in os.listdir(REPO_PATH):
-        if st.button("Initialise PyVen for the Repo"):
+        InitButton = st.empty()
+        if InitButton.button("Initialise PyVen for the Repo"):
             USERINPUT_FeatureChoice = FEATURES[DEFAULT_FEATURE_NAME_PYVENSTARTER]
             LoaderWidget = st.empty()
             ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, {"choiceBased": {}, "checkBased": {}}, LoaderWidget)
             LoaderWidget.markdown("Repo initialised with PyVen!")
-        return
+            InitButton.markdown("")
+        else:
+            return
 
     USERINPUT_FeatureChoiceName = st.selectbox("Select Feature", ["Select Feature"] + list(FEATURES.keys()))
     if USERINPUT_FeatureChoiceName == "Select Feature": return
     USERINPUT_FeatureChoice = FEATURES[USERINPUT_FeatureChoiceName]
 
-    specialInputs = UI_GetFeatureParams(USERINPUT_FeatureChoice)
+    features_pyven_repo_path = JoinPath(REPO_PATH, ".pyven/features.json")
+    added_features_data = json.load(open(features_pyven_repo_path, 'r'))["added_features"]
+    ButtonName = "Add"
+    featureExists = False
+    specialInputs_Default = None
+    if USERINPUT_FeatureChoiceName not in added_features_data.keys():
+        st.markdown("Feature " + USERINPUT_FeatureChoiceName + " not yet added to " + REPO_NAME + ".")
+    else:
+        st.markdown("Feature " + USERINPUT_FeatureChoiceName + " already added in " + REPO_NAME + ".")
+        ButtonName = "Update"
+        featureExists = True
+        # specialInputs_Default = added_features_data[USERINPUT_FeatureChoiceName]["special"] # Commented as this messes up the UI
+
+
+    specialInputs = UI_GetFeatureParams(USERINPUT_FeatureChoice, specialInputs_Default)
 
     # Process Inputs
-    if st.button("Add"):
+    col1, col2 = st.beta_columns(2)
+    bcol1 = col1.empty()
+    bcol2 = col2.empty()
+    if bcol1.button(ButtonName + " Feature", key="BA1"):
         LoaderWidget = st.empty()
-        ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, specialInputs, LoaderWidget)
+        if featureExists:
+            ModularFeatures.ModularFeature_Remove(USERINPUT_FeatureChoice, REPO_PATH, LoaderWidget, USERINPUT_SafeUpdate)
+        ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, specialInputs, LoaderWidget, USERINPUT_SafeUpdate)
         LoaderWidget.markdown("Feature Added!")
 
-        # Save PyVen Metadata for the repo
+        # Save PyVen Metadata for the repo after adding the feature
         FEATURES_DATA = LoadPyVenFeaturesMetadata(REPO_PATH)
         FEATURES_DATA["added_features"][USERINPUT_FeatureChoiceName] = {
             "name": USERINPUT_FeatureChoiceName,
             "special": specialInputs
         }
         SavePyVenFeaturesMetadata(REPO_PATH, FEATURES_DATA)
-        
-        # Display Outputs
+        featureExists = True
+        ButtonName = "Update"
+        bcol1.button(ButtonName + " Feature", key="BU")
+    
+    if featureExists:
+        if bcol2.button("Remove Feature"):
+            LoaderWidget = st.empty()
+            ModularFeatures.ModularFeature_Remove(USERINPUT_FeatureChoice, REPO_PATH, LoaderWidget, USERINPUT_SafeUpdate)
+
+            # Save PyVen Metadata for the repo after removing the feature
+            FEATURES_DATA = LoadPyVenFeaturesMetadata(REPO_PATH)
+            FEATURES_DATA["added_features"].pop(USERINPUT_FeatureChoiceName)
+            SavePyVenFeaturesMetadata(REPO_PATH, FEATURES_DATA)
+            featureExists = False
+            ButtonName = "Add"
+            bcol1.button(ButtonName + " Feature", key="BA2")
+            bcol2.markdown("")
 
 
 def settings():
