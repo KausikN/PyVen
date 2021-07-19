@@ -3,6 +3,7 @@
         "StreamLitGUI/",
         "app.py",
         "PyVen.py",
-        "ModularFeatures.py"
+        "ModularFeatures.py",
+        "ModularFeaturesData/"
     ]
 }
