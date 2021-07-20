@@ -39,8 +39,9 @@ def UpdateUniqueDependencies(uD, newDeps):
 def CheckIfPipModule(moduleName, package):
     try:
         mod_spec_pkg = importlib.util.find_spec(moduleName, package=package)
+        if (mod_spec_pkg is not None): return True
         mod_spec_direct = importlib.util.find_spec(package + "." + moduleName, package="")
-        return (mod_spec_pkg is not None) or (mod_spec_direct is not None)
+        return (mod_spec_direct is not None)
     except:
         return False
 
