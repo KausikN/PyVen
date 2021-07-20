@@ -8,6 +8,7 @@ import cv2
 import pickle
 import functools
 import numpy as np
+from pkg_resources import require
 import streamlit as st
 import json
 
@@ -110,6 +111,14 @@ def RebuildModules(REPO_PATH):
     Modules = PyVen.Repo_FindModules(REPO_PATH)
     SavePyVenModulesMetadata(REPO_PATH, Modules)
 
+def UpdateRepoBasicDetails(REPO_PATH, REPO_NAME):
+    BasicInfo = json.load(open(JoinPath(REPO_PATH, ".pyven/basic_info.json"), 'r'))
+    BasicInfo["repo_name"] = REPO_NAME
+    requirements = []
+    if "requirements.txt" in os.listdir(REPO_PATH):
+        requirements = [line.strip() for line in open(JoinPath(REPO_PATH, "requirements.txt"), 'r').readlines()]
+    BasicInfo["requirements"] = requirements
+    json.dump(BasicInfo, open(JoinPath(REPO_PATH, ".pyven/basic_info.json"), 'w'), indent=4)
 
 # UI Functions
 def UI_LoadRepos(parentPaths):
@@ -194,7 +203,7 @@ def UI_GetFeatureParams(feature_path, defaults=None, nCols=3):
     
     return specialInputs
 
-def UI_CheckPyVenInit(REPO_PATH):
+def UI_CheckPyVenInit(REPO_PATH, REPO_NAME):
     if ".pyven" not in os.listdir(REPO_PATH):
         InitButton = st.empty()
         if InitButton.button("Initialise PyVen for the Repo"):
@@ -205,6 +214,9 @@ def UI_CheckPyVenInit(REPO_PATH):
 
             # Update Modules in .pyven
             RebuildModules(REPO_PATH)
+
+            # Update basic_info.json
+            UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
             
             LoaderWidget.markdown("Repo initialised with PyVen!")
             InitButton.markdown("")
@@ -226,7 +238,7 @@ def analyse_repo():
     REPO_DATAS = CACHE["GIT_REPOS"]
 
     # Load Inputs
-    USERINPUT_RebuildModules = st.sidebar.button("Rebuild Modules")
+    USERINPUT_RebuildPyVenData = st.sidebar.button("Rebuild PyVen Data")
 
     USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES)
     if USERINPUT_RepoChoiceName == "Select Repo": return
@@ -249,9 +261,10 @@ def analyse_repo():
     else:
         USERINPUT_AddedFeaturesChoice = st.selectbox("Added Features", ADDED_FEATURES)
 
-    if USERINPUT_RebuildModules:
+    if USERINPUT_RebuildPyVenData:
         RebuildModules(REPO_PATH)
-        st.markdown("Rebuilt Modules!")
+        UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
+        st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
 
 def edit_repo_features():
     global FEATURES
@@ -266,7 +279,7 @@ def edit_repo_features():
 
     # Load Inputs
     USERINPUT_SafeUpdate = st.sidebar.checkbox("Safe Update/Remove", True)
-    USERINPUT_RebuildModules = st.sidebar.button("Rebuild Modules")
+    USERINPUT_RebuildPyVenData = st.sidebar.button("Rebuild PyVen Data")
 
     USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES)
     if USERINPUT_RepoChoiceName == "Select Repo": return
@@ -275,9 +288,9 @@ def edit_repo_features():
     REPO_NAME = USERINPUT_RepoChoice["name"]
 
     # Check if PyVen Initialised in repo
-    if not UI_CheckPyVenInit(REPO_PATH): return
+    if not UI_CheckPyVenInit(REPO_PATH, REPO_NAME): return
 
-    USERINPUT_FeatureChoiceName = st.selectbox("Select Feature", ["Select Feature"] + list(FEATURES.keys()))
+    USERINPUT_FeatureChoiceName = st.selectbox("Select Feature", ["Select Feature"] + list(FEATURES.keys()), index=1)
     if USERINPUT_FeatureChoiceName == "Select Feature": return
     USERINPUT_FeatureChoice = FEATURES[USERINPUT_FeatureChoiceName]
 
@@ -317,7 +330,7 @@ def edit_repo_features():
         featureExists = True
         ButtonName = "Update"
         bcol1.button(ButtonName + " Feature", key="BU")
-        USERINPUT_RebuildModules = True
+        USERINPUT_RebuildPyVenData = True
     
     if featureExists:
         if bcol2.button("Remove Feature"):
@@ -332,11 +345,13 @@ def edit_repo_features():
             ButtonName = "Add"
             bcol1.button(ButtonName + " Feature", key="BA2")
             bcol2.markdown("")
-            USERINPUT_RebuildModules = True
+            USERINPUT_RebuildPyVenData = True
 
-    if USERINPUT_RebuildModules:
+    if USERINPUT_RebuildPyVenData:
         RebuildModules(REPO_PATH)
-        st.markdown("Rebuilt Modules!")
+        UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
+        print("Here")
+        st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
 
 
 def settings():

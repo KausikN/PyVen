@@ -15,6 +15,7 @@
                 "pickle.py",
                 "functools.py",
                 "numpy.py",
+                "pkg_resources/require.py",
                 "streamlit.py",
                 "json.py",
                 "PyVen.py",
@@ -142,56 +143,16 @@
                 "json.py"
             ]
         },
-        "scipy/stats.py": {
-            "name": "stats",
+        "scipy/optimize.py": {
+            "name": "optimize",
             "type": "inbuilt",
             "link": "",
             "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
             "subDir": "scipy",
             "dependencies": []
         },
-        "random.py": {
-            "name": "random",
-            "type": "missing",
-            "link": "",
-            "parentDir": "",
-            "subDir": "",
-            "dependencies": []
-        },
-        "matplotlib.pyplot.py": {
-            "name": "matplotlib.pyplot",
-            "type": "missing",
-            "link": "",
-            "parentDir": "",
-            "subDir": "",
-            "dependencies": []
-        },
-        "importlib.py": {
-            "name": "importlib",
-            "type": "missing",
-            "link": "",
-            "parentDir": "",
-            "subDir": "",
-            "dependencies": []
-        },
-        "json.py": {
-            "name": "json",
-            "type": "missing",
-            "link": "",
-            "parentDir": "",
-            "subDir": "",
-            "dependencies": []
-        },
-        "time.py": {
-            "name": "time",
-            "type": "missing",
-            "link": "",
-            "parentDir": "",
-            "subDir": "",
-            "dependencies": []
-        },
-        "functools.py": {
-            "name": "functools",
+        "os.py": {
+            "name": "os",
             "type": "missing",
             "link": "",
             "parentDir": "",
@@ -206,40 +167,24 @@
             "subDir": "",
             "dependencies": []
         },
-        "pickle.py": {
-            "name": "pickle",
+        "matplotlib.pyplot.py": {
+            "name": "matplotlib.pyplot",
             "type": "missing",
             "link": "",
             "parentDir": "",
             "subDir": "",
             "dependencies": []
         },
-        "streamlit.py": {
-            "name": "streamlit",
+        "pkg_resources/require.py": {
+            "name": "require",
             "type": "missing",
             "link": "",
             "parentDir": "",
-            "subDir": "",
-            "dependencies": []
-        },
-        "scipy/optimize.py": {
-            "name": "optimize",
-            "type": "inbuilt",
-            "link": "",
-            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
-            "subDir": "scipy",
+            "subDir": "pkg_resources",
             "dependencies": []
         },
         "numpy.py": {
             "name": "numpy",
-            "type": "missing",
-            "link": "",
-            "parentDir": "",
-            "subDir": "",
-            "dependencies": []
-        },
-        "shutil.py": {
-            "name": "shutil",
             "type": "missing",
             "link": "",
             "parentDir": "",
@@ -254,16 +199,8 @@
             "subDir": "",
             "dependencies": []
         },
-        "pygame.py": {
-            "name": "pygame",
-            "type": "missing",
-            "link": "",
-            "parentDir": "",
-            "subDir": "",
-            "dependencies": []
-        },
-        "os.py": {
-            "name": "os",
+        "functools.py": {
+            "name": "functools",
             "type": "missing",
             "link": "",
             "parentDir": "",
@@ -272,6 +209,78 @@
         },
         "sys.py": {
             "name": "sys",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "streamlit.py": {
+            "name": "streamlit",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "importlib.py": {
+            "name": "importlib",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "time.py": {
+            "name": "time",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "random.py": {
+            "name": "random",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "scipy/stats.py": {
+            "name": "stats",
+            "type": "inbuilt",
+            "link": "",
+            "parentDir": "E:/Github Codes and Projects/Projects/PyVen",
+            "subDir": "scipy",
+            "dependencies": []
+        },
+        "shutil.py": {
+            "name": "shutil",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "json.py": {
+            "name": "json",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "pickle.py": {
+            "name": "pickle",
+            "type": "missing",
+            "link": "",
+            "parentDir": "",
+            "subDir": "",
+            "dependencies": []
+        },
+        "pygame.py": {
+            "name": "pygame",
             "type": "missing",
             "link": "",
             "parentDir": "",

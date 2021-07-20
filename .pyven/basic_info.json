@@ -1,3 +1,10 @@
 {
-    "requirements": []
+    "repo_name": "PyVen",
+    "requirements": [
+        "streamlit",
+        "numpy",
+        "matplotlib",
+        "opencv-python-headless",
+        "tqdm"
+    ]
 }
