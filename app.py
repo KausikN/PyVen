@@ -224,7 +224,27 @@ def UI_CheckPyVenInit(REPO_PATH, REPO_NAME):
         else:
             return False
     return True
-    
+
+def UI_SearchModePrune(REPO_DATAS, REPO_NAMES):
+    global FEATURES
+
+    USERINPUT_SearchMode = st.selectbox("Search Mode", ["Search by Repo Name", "Search by Added Features"])
+    if USERINPUT_SearchMode == "Search by Repo Name":
+        return REPO_DATAS, REPO_NAMES
+    elif USERINPUT_SearchMode == "Search by Added Features":
+        USERINPUT_RequiredFeatures = st.multiselect("Features", list(FEATURES.keys()))
+        if len(USERINPUT_RequiredFeatures) == 0: return REPO_DATAS, REPO_NAMES
+        REPO_DATAS_PRUNED, REPO_NAMES_PRUNED = [], []
+        for repo in REPO_DATAS:
+            repo_path = repo["path"]
+            if ".pyven" not in os.listdir(repo_path): # Repo not initialised with pyven
+                continue
+            features_data = LoadPyVenFeaturesMetadata(repo_path)
+            features_names = list(features_data["added_features"].keys())
+            if(set(USERINPUT_RequiredFeatures).issubset(set(features_names))):
+                REPO_DATAS_PRUNED.append(repo)
+                REPO_NAMES_PRUNED.append(repo["name"])
+        return REPO_DATAS_PRUNED, REPO_NAMES_PRUNED
 
 # Repo Based Functions
 def analyse_repo():
@@ -234,15 +254,18 @@ def analyse_repo():
     st.header("Analyse Local Repo")
 
     LoadCache()
+    LoadFeatures()
     REPO_NAMES = GetNames(CACHE["GIT_REPOS"])
     REPO_DATAS = CACHE["GIT_REPOS"]
 
     # Load Inputs
     USERINPUT_RebuildPyVenData = st.sidebar.button("Rebuild PyVen Data")
 
-    USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES)
+    REPO_DATAS_PRUNED, REPO_NAMES_PRUNED = UI_SearchModePrune(REPO_DATAS, REPO_NAMES)
+
+    USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES_PRUNED)
     if USERINPUT_RepoChoiceName == "Select Repo": return
-    USERINPUT_RepoChoice = REPO_DATAS[REPO_NAMES.index(USERINPUT_RepoChoiceName)]
+    USERINPUT_RepoChoice = REPO_DATAS_PRUNED[REPO_NAMES_PRUNED.index(USERINPUT_RepoChoiceName)]
 
     # Process Inputs
     # Load Repo
