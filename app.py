@@ -373,7 +373,6 @@ def edit_repo_features():
     if USERINPUT_RebuildPyVenData:
         RebuildModules(REPO_PATH)
         UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
-        print("Here")
         st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
 
 
