@@ -83,7 +83,7 @@ def ParseImports_Python(code_path):
 
     codeDir = os.path.dirname(code_path).replace("\\", "/")
 
-    code = open(code_path, 'r').read()
+    code = open(code_path, 'r', encoding="utf8").read()
     code_lines = code.split('\n')
 
     imports = []
