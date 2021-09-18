@@ -6,6 +6,7 @@ A python importing and packaging tool similar to Maven for Java
 import os
 import json
 import importlib
+import ast
 
 # Main Functions
 def SaveData(data, path):
@@ -73,10 +74,10 @@ def GetAllLocalRepos(parent_path):
             
 
 ### Imports Parsers ######################################################################################################
-def ParseImports_Python(code_path):
+def ParseImports_Python_Regex(code_path):
     '''
-    ParseImports_Python(path) -> list<str>
-    Parses all imports in a python file
+    ParseImports_Python_Regex(path) -> list<str>
+    Parses all imports in a python file using Regex
     '''
 
     if not os.path.exists(code_path): return []
@@ -179,6 +180,52 @@ def ParseImports_Python(code_path):
             imports.extend(lineImports_Cleaned)
 
     return imports
+
+def ParseImports_Python(code_path):
+    '''
+    ParseImports_Python(path) -> list<str>
+    Parses all imports in a python file using ast module
+    '''
+
+    if not os.path.exists(code_path): return []
+    codeDir = os.path.dirname(code_path).replace("\\", "/")
+    code = open(code_path, 'r', encoding="utf8").read()
+
+    CodeModule = ast.parse(code)
+    # functions = [x for x in CodeModule.body if isinstance(x, ast.FunctionDef)]
+
+    imports = []
+    Imports = [x for x in CodeModule.body if isinstance(x, ast.Import)]
+    FromImports = [x for x in CodeModule.body if isinstance(x, ast.ImportFrom)]
+    for impG in Imports:
+        impsDicts = []
+        for imp in impG.names:
+            name = imp.name.split(".")[-1]
+            module = imp.name.rstrip(name).rstrip(".")
+            impData = {
+                "parentDir": codeDir,
+                "subDir": "/".join(module.split(".")),
+                "name": name
+            }
+            impsDicts.append(impData)
+        imports.extend(impsDicts)
+    for impG in FromImports:
+        impsDicts = []
+        for imp in impG.names:
+            name = imp.name.split(".")[-1]
+            module = ".".join([impG.module, imp.name.rstrip(name).rstrip(".")]).rstrip(".")
+            impData = {
+                "parentDir": codeDir,
+                "subDir": "/".join(module.split(".")),
+                "name": name
+            }
+            impsDicts.append(impData)
+        imports.extend(impsDicts)
+
+    print(json.dumps(imports, indent=4))
+
+    return imports
+
 ##########################################################################################################################
 
 ### BASIC DEPENDENCY TREE ################################################################################################
