@@ -61,8 +61,6 @@ def GetVersionSplitPath(path):
     return [versionDir, fileHeirarchy]
 
 def CheckDataSame(src, dst):
-    print("\n")
-    print([src, dst])
     if (not os.path.exists(src)) or (not os.path.exists(dst)):
         return False
     
@@ -73,7 +71,6 @@ def CheckDataSame(src, dst):
             for file in files:
                 src_file = JoinPath(root, file)
                 dst_file = JoinPath(dst, src_file.replace(src, "", 1))
-                print([src_file, dst_file])
                 if (not os.path.exists(dst_file)):
                     return False
                 if os.path.isfile(src_file) and os.path.isfile(dst_file):

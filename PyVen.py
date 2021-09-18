@@ -221,9 +221,7 @@ def ParseImports_Python(code_path):
             }
             impsDicts.append(impData)
         imports.extend(impsDicts)
-
-    print(json.dumps(imports, indent=4))
-
+        
     return imports
 
 ##########################################################################################################################
