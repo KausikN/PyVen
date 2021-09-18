@@ -4,20 +4,248 @@
     ],
     "GIT_REPOS": [
         {
-            "name": "SpeechSynth",
-            "path": "E:/Github Codes and Projects/Projects/SpeechSynth"
+            "name": "MusicMaker",
+            "path": "E:/Github Codes and Projects/Projects/MusicMaker"
+        },
+        {
+            "name": "Gattaca",
+            "path": "E:/Github Codes and Projects/Projects/Gattaca"
+        },
+        {
+            "name": "RPA",
+            "path": "E:/Github Codes and Projects/Projects/RPA"
+        },
+        {
+            "name": "eBramhaAR_Scripts",
+            "path": "E:/Github Codes and Projects/eBramhaAR_Scripts"
+        },
+        {
+            "name": "RandomIdeaOrganiser",
+            "path": "E:/Github Codes and Projects/Projects/RandomIdeaOrganiser"
+        },
+        {
+            "name": "TomosuloAlgorithm",
+            "path": "E:/Github Codes and Projects/TomosuloAlgorithm"
+        },
+        {
+            "name": "DevoteeApp",
+            "path": "E:/Github Codes and Projects/Projects/DevoteeDatabase/DevoteeApp"
+        },
+        {
+            "name": "UpcomingTechnologies",
+            "path": "E:/Github Codes and Projects/UpcomingTechnologies"
+        },
+        {
+            "name": "MyGit",
+            "path": "E:/Github Codes and Projects/Projects/MyGit"
+        },
+        {
+            "name": "CaptchaGotcha",
+            "path": "E:/Github Codes and Projects/Projects/CaptchaGotcha"
+        },
+        {
+            "name": "VidFX",
+            "path": "E:/Github Codes and Projects/Projects/VidFX"
         },
         {
             "name": "MazeRunner",
             "path": "E:/Github Codes and Projects/Projects/MazeRunner"
         },
         {
-            "name": "MusicMaker",
-            "path": "E:/Github Codes and Projects/Projects/MusicMaker"
+            "name": "ImageProcessing_Files",
+            "path": "E:/Github Codes and Projects/ImageProcessing_Files"
+        },
+        {
+            "name": "DSA_C_Files",
+            "path": "E:/Github Codes and Projects/DSA_C_Files"
+        },
+        {
+            "name": "NitroTurtle",
+            "path": "E:/Github Codes and Projects/Projects/NitroTurtle"
+        },
+        {
+            "name": "HELP4ALL",
+            "path": "E:/Github Codes and Projects/Projects/HELP4ALL"
+        },
+        {
+            "name": "HandwritingGen",
+            "path": "E:/Github Codes and Projects/Projects/HandwritingGen"
+        },
+        {
+            "name": "Nucleus",
+            "path": "E:/Github Codes and Projects/Projects/Nucleus"
+        },
+        {
+            "name": "spirit-api",
+            "path": "E:/Github Codes and Projects/JulianaProjects/spirit-api"
+        },
+        {
+            "name": "PatternRecognition_Files",
+            "path": "E:/Github Codes and Projects/PatternRecognition_Files"
+        },
+        {
+            "name": "DaVIS",
+            "path": "E:/Github Codes and Projects/Projects/DaVIS"
+        },
+        {
+            "name": "ProcLab",
+            "path": "E:/Github Codes and Projects/Projects/ProcLab"
+        },
+        {
+            "name": "AnimASCII",
+            "path": "E:/Github Codes and Projects/Projects/AnimASCII"
+        },
+        {
+            "name": "LANFileTransfer",
+            "path": "E:/Github Codes and Projects/LANFileTransfer"
+        },
+        {
+            "name": "ARMSIM_Codes",
+            "path": "E:/Github Codes and Projects/ARMSIM_Codes"
+        },
+        {
+            "name": "ChessOverloaded",
+            "path": "E:/Github Codes and Projects/Projects/ChessOverloaded"
+        },
+        {
+            "name": "PyThread",
+            "path": "E:/Github Codes and Projects/Projects/PyThread"
+        },
+        {
+            "name": "siMpLe_ML",
+            "path": "E:/Github Codes and Projects/Projects/siMpLe_ML"
+        },
+        {
+            "name": "ANNCodeGen",
+            "path": "E:/Github Codes and Projects/Projects/ANNCodeGen"
+        },
+        {
+            "name": "ImTron",
+            "path": "E:/Github Codes and Projects/Projects/ImTron"
         },
         {
             "name": "PyVen",
             "path": "E:/Github Codes and Projects/Projects/PyVen"
+        },
+        {
+            "name": "ConwaysGameofLife",
+            "path": "E:/Github Codes and Projects/Projects/ConwaysGameofLife"
+        },
+        {
+            "name": "IITM_Files",
+            "path": "E:/Github Codes and Projects/IITM_Files"
+        },
+        {
+            "name": "VLSI_Files",
+            "path": "E:/Github Codes and Projects/VLSI_Files"
+        },
+        {
+            "name": "PixelBreak",
+            "path": "E:/Github Codes and Projects/Projects/PixelBreak"
+        },
+        {
+            "name": "NeuralNetworkNuke",
+            "path": "E:/Github Codes and Projects/Projects/NeuralNetworkNuke"
+        },
+        {
+            "name": "WebSlither",
+            "path": "E:/Github Codes and Projects/Projects/WebSlither"
+        },
+        {
+            "name": "MyResume",
+            "path": "E:/Github Codes and Projects/MyResume"
+        },
+        {
+            "name": "AlgoVis",
+            "path": "E:/Github Codes and Projects/Projects/AlgoVis"
+        },
+        {
+            "name": "PandemicForecasting",
+            "path": "E:/Github Codes and Projects/Projects/PandemicForecasting"
+        },
+        {
+            "name": "EasyInit",
+            "path": "E:/Github Codes and Projects/Projects/EasyInit"
+        },
+        {
+            "name": "Logism_Files",
+            "path": "E:/Github Codes and Projects/Logism_Files"
+        },
+        {
+            "name": "CyberSecurity",
+            "path": "E:/Github Codes and Projects/Workshops/CyberSecurity"
+        },
+        {
+            "name": "HCI_Files",
+            "path": "E:/Github Codes and Projects/HCI_Files"
+        },
+        {
+            "name": "CompArch_Files",
+            "path": "E:/Github Codes and Projects/CompArch_Files"
+        },
+        {
+            "name": "Securo",
+            "path": "E:/Github Codes and Projects/Projects/Securo"
+        },
+        {
+            "name": "Assemble_VideoConferencingApp",
+            "path": "E:/Github Codes and Projects/Projects/Assemble_VideoConferencingApp"
+        },
+        {
+            "name": "GUVI_FullStack_WebsiteCodes",
+            "path": "E:/Github Codes and Projects/Projects/GUVI_FullStack_WebsiteCodes"
+        },
+        {
+            "name": "DescripGen",
+            "path": "E:/Github Codes and Projects/Projects/DescripGen"
+        },
+        {
+            "name": "TataCliqFragrances",
+            "path": "E:/Github Codes and Projects/Avataar_Internship/SparkAR_Files/Tata/TataCliqFragrances"
+        },
+        {
+            "name": "MemeCompress",
+            "path": "E:/Github Codes and Projects/Projects/MemeCompress"
+        },
+        {
+            "name": "BengaliCharacterRecognition",
+            "path": "E:/Github Codes and Projects/Projects/BengaliCharacterRecognition"
+        },
+        {
+            "name": "TerrainGen",
+            "path": "E:/Github Codes and Projects/Projects/TerrainGen"
+        },
+        {
+            "name": "GigaCode",
+            "path": "E:/Github Codes and Projects/Projects/GigaCode"
+        },
+        {
+            "name": "InfinityJoker",
+            "path": "E:/Github Codes and Projects/Projects/InfinityJoker"
+        },
+        {
+            "name": "MediaOrganiser",
+            "path": "E:/Github Codes and Projects/Projects/MediaOrganiser"
+        },
+        {
+            "name": "ChaosVis",
+            "path": "E:/Github Codes and Projects/Projects/ChaosVis"
+        },
+        {
+            "name": "HerokuTestApp",
+            "path": "E:/Github Codes and Projects/Projects/HerokuTestApp"
+        },
+        {
+            "name": "MediaTor",
+            "path": "E:/Github Codes and Projects/Projects/MediaTor"
+        },
+        {
+            "name": "HospiDB",
+            "path": "E:/Github Codes and Projects/Projects/HospiDB"
+        },
+        {
+            "name": "MultiUserGameplay",
+            "path": "E:/Github Codes and Projects/Projects/MultiUserGameplay"
         },
         {
             "name": "OS_Files",
@@ -28,304 +256,88 @@
             "path": "E:/Github Codes and Projects/Projects/Accilert_Codes"
         },
         {
-            "name": "GigaCode",
-            "path": "E:/Github Codes and Projects/Projects/GigaCode"
-        },
-        {
-            "name": "SPI_Internship_Project",
-            "path": "E:/Github Codes and Projects/Projects/SPI_Internship_Project"
-        },
-        {
-            "name": "FastAnnotator",
-            "path": "E:/Github Codes and Projects/Projects/FastAnnotator"
-        },
-        {
-            "name": "NeuralNetworkNuke",
-            "path": "E:/Github Codes and Projects/Projects/NeuralNetworkNuke"
-        },
-        {
-            "name": "Securo",
-            "path": "E:/Github Codes and Projects/Projects/Securo"
-        },
-        {
-            "name": "ProcLab",
-            "path": "E:/Github Codes and Projects/Projects/ProcLab"
-        },
-        {
-            "name": "ChaosVis",
-            "path": "E:/Github Codes and Projects/Projects/ChaosVis"
-        },
-        {
-            "name": "siMpLe_ML",
-            "path": "E:/Github Codes and Projects/Projects/siMpLe_ML"
-        },
-        {
-            "name": "Logism_Files",
-            "path": "E:/Github Codes and Projects/Logism_Files"
-        },
-        {
-            "name": "MediaOrganiser",
-            "path": "E:/Github Codes and Projects/Projects/MediaOrganiser"
-        },
-        {
-            "name": "MultiUserGameplay",
-            "path": "E:/Github Codes and Projects/Projects/MultiUserGameplay"
-        },
-        {
-            "name": "ImageColoriser",
-            "path": "E:/Github Codes and Projects/Projects/ImageColoriser"
-        },
-        {
-            "name": "ActivityFactorComputer",
-            "path": "E:/Github Codes and Projects/Projects/ActivityFactorComputer"
-        },
-        {
-            "name": "LANFileTransfer_Java",
-            "path": "E:/Github Codes and Projects/Projects/LANFileTransfer_Java"
-        },
-        {
-            "name": "LANFileTransfer",
-            "path": "E:/Github Codes and Projects/LANFileTransfer"
-        },
-        {
-            "name": "ConwaysGameofLife",
-            "path": "E:/Github Codes and Projects/Projects/ConwaysGameofLife"
-        },
-        {
-            "name": "BengaliCharacterRecognition",
-            "path": "E:/Github Codes and Projects/Projects/BengaliCharacterRecognition"
-        },
-        {
-            "name": "SkelAnim",
-            "path": "E:/Github Codes and Projects/Projects/SkelAnim"
-        },
-        {
-            "name": "MyGit",
-            "path": "E:/Github Codes and Projects/Projects/MyGit"
-        },
-        {
-            "name": "RPA",
-            "path": "E:/Github Codes and Projects/Projects/RPA"
-        },
-        {
-            "name": "Algo_CPP_Files",
-            "path": "E:/Github Codes and Projects/Algo_CPP_Files"
-        },
-        {
-            "name": "HELP4ALL",
-            "path": "E:/Github Codes and Projects/Projects/HELP4ALL"
-        },
-        {
-            "name": "spirit-api",
-            "path": "E:/Github Codes and Projects/JulianaProjects/spirit-api"
-        },
-        {
-            "name": "MemeCompress",
-            "path": "E:/Github Codes and Projects/Projects/MemeCompress"
-        },
-        {
-            "name": "CompArch_Files",
-            "path": "E:/Github Codes and Projects/CompArch_Files"
-        },
-        {
-            "name": "Mozhi",
-            "path": "E:/Github Codes and Projects/Projects/Mozhi"
-        },
-        {
-            "name": "InfinityJoker",
-            "path": "E:/Github Codes and Projects/Projects/InfinityJoker"
-        },
-        {
-            "name": "ImTron",
-            "path": "E:/Github Codes and Projects/Projects/ImTron"
-        },
-        {
-            "name": "HerokuTestApp",
-            "path": "E:/Github Codes and Projects/Projects/HerokuTestApp"
-        },
-        {
-            "name": "HandwritingGen",
-            "path": "E:/Github Codes and Projects/Projects/HandwritingGen"
-        },
-        {
-            "name": "ChessOverloaded",
-            "path": "E:/Github Codes and Projects/Projects/ChessOverloaded"
-        },
-        {
-            "name": "HCI_Files",
-            "path": "E:/Github Codes and Projects/HCI_Files"
-        },
-        {
             "name": "BigData_Files",
             "path": "E:/Github Codes and Projects/BigData_Files"
-        },
-        {
-            "name": "juliana-discord",
-            "path": "E:/Github Codes and Projects/HerokuDeployedApps/Juliana/juliana-discord"
-        },
-        {
-            "name": "AnimASCII",
-            "path": "E:/Github Codes and Projects/Projects/AnimASCII"
-        },
-        {
-            "name": "Assemble_VideoConferencingApp",
-            "path": "E:/Github Codes and Projects/Projects/Assemble_VideoConferencingApp"
-        },
-        {
-            "name": "MediaTor",
-            "path": "E:/Github Codes and Projects/Projects/MediaTor"
-        },
-        {
-            "name": "PixelBreak",
-            "path": "E:/Github Codes and Projects/Projects/PixelBreak"
         },
         {
             "name": "FilmyPy",
             "path": "E:/Github Codes and Projects/Projects/FilmyPy"
         },
         {
-            "name": "PatternRecognition_Files",
-            "path": "E:/Github Codes and Projects/PatternRecognition_Files"
+            "name": "juliana-discord",
+            "path": "E:/Github Codes and Projects/HerokuDeployedApps/Juliana/juliana-discord"
         },
         {
-            "name": "Networking_Files",
-            "path": "E:/Github Codes and Projects/Networking_Files"
-        },
-        {
-            "name": "PandemicForecasting",
-            "path": "E:/Github Codes and Projects/Projects/PandemicForecasting"
-        },
-        {
-            "name": "TomosuloAlgorithm",
-            "path": "E:/Github Codes and Projects/TomosuloAlgorithm"
-        },
-        {
-            "name": "Nucleus",
-            "path": "E:/Github Codes and Projects/Projects/Nucleus"
-        },
-        {
-            "name": "MachineLearningCodes",
-            "path": "E:/Github Codes and Projects/MachineLearningCodes"
-        },
-        {
-            "name": "Gattaca",
-            "path": "E:/Github Codes and Projects/Projects/Gattaca"
-        },
-        {
-            "name": "UpcomingTechnologies",
-            "path": "E:/Github Codes and Projects/UpcomingTechnologies"
+            "name": "SpeechSynth",
+            "path": "E:/Github Codes and Projects/Projects/SpeechSynth"
         },
         {
             "name": "DuoSecure",
             "path": "E:/Github Codes and Projects/Projects/DuoSecure"
         },
         {
-            "name": "CommonHostApp",
-            "path": "E:/Github Codes and Projects/Projects/CommonHostApp"
+            "name": "VerilogTestBenchGenerator",
+            "path": "E:/Github Codes and Projects/VerilogTestBenchGenerator"
         },
         {
-            "name": "ANNCodeGen",
-            "path": "E:/Github Codes and Projects/Projects/ANNCodeGen"
-        },
-        {
-            "name": "MyResume",
-            "path": "E:/Github Codes and Projects/MyResume"
-        },
-        {
-            "name": "HospiDB",
-            "path": "E:/Github Codes and Projects/Projects/HospiDB"
+            "name": "LANFileTransfer_Java",
+            "path": "E:/Github Codes and Projects/Projects/LANFileTransfer_Java"
         },
         {
             "name": "Juliana",
             "path": "E:/Github Codes and Projects/JulianaProjects/Juliana"
         },
         {
-            "name": "ImageProcessing_Files",
-            "path": "E:/Github Codes and Projects/ImageProcessing_Files"
+            "name": "CommonHostApp",
+            "path": "E:/Github Codes and Projects/Projects/CommonHostApp"
         },
         {
-            "name": "TataCliqFragrances",
-            "path": "E:/Github Codes and Projects/Avataar_Internship/SparkAR_Files/Tata/TataCliqFragrances"
+            "name": "Networking_Files",
+            "path": "E:/Github Codes and Projects/Networking_Files"
         },
         {
-            "name": "eBramhaAR_Scripts",
-            "path": "E:/Github Codes and Projects/eBramhaAR_Scripts"
+            "name": "Mozhi",
+            "path": "E:/Github Codes and Projects/Projects/Mozhi"
         },
         {
-            "name": "WebSlither",
-            "path": "E:/Github Codes and Projects/Projects/WebSlither"
+            "name": "SPI_Internship_Project",
+            "path": "E:/Github Codes and Projects/Projects/SPI_Internship_Project"
         },
         {
-            "name": "CaptchaGotcha",
-            "path": "E:/Github Codes and Projects/Projects/CaptchaGotcha"
+            "name": "MachineLearningCodes",
+            "path": "E:/Github Codes and Projects/MachineLearningCodes"
         },
         {
-            "name": "DaVIS",
-            "path": "E:/Github Codes and Projects/Projects/DaVIS"
+            "name": "ActivityFactorComputer",
+            "path": "E:/Github Codes and Projects/Projects/ActivityFactorComputer"
+        },
+        {
+            "name": "ImageColoriser",
+            "path": "E:/Github Codes and Projects/Projects/ImageColoriser"
+        },
+        {
+            "name": "FastAnnotator",
+            "path": "E:/Github Codes and Projects/Projects/FastAnnotator"
         },
         {
             "name": "MemoryBasedComputation",
             "path": "E:/Github Codes and Projects/Projects/MemoryBasedComputation"
         },
         {
-            "name": "DSA_C_Files",
-            "path": "E:/Github Codes and Projects/DSA_C_Files"
-        },
-        {
-            "name": "VidFX",
-            "path": "E:/Github Codes and Projects/Projects/VidFX"
-        },
-        {
-            "name": "PyThread",
-            "path": "E:/Github Codes and Projects/Projects/PyThread"
-        },
-        {
-            "name": "EmbeddedSystems_Files",
-            "path": "E:/Github Codes and Projects/EmbeddedSystems_Files"
-        },
-        {
-            "name": "CyberSecurity",
-            "path": "E:/Github Codes and Projects/Workshops/CyberSecurity"
-        },
-        {
-            "name": "VerilogTestBenchGenerator",
-            "path": "E:/Github Codes and Projects/VerilogTestBenchGenerator"
-        },
-        {
-            "name": "VLSI_Files",
-            "path": "E:/Github Codes and Projects/VLSI_Files"
-        },
-        {
-            "name": "GUVI_FullStack_WebsiteCodes",
-            "path": "E:/Github Codes and Projects/Projects/GUVI_FullStack_WebsiteCodes"
-        },
-        {
-            "name": "DevoteeApp",
-            "path": "E:/Github Codes and Projects/Projects/DevoteeDatabase/DevoteeApp"
-        },
-        {
-            "name": "NitroTurtle",
-            "path": "E:/Github Codes and Projects/Projects/NitroTurtle"
+            "name": "Algo_CPP_Files",
+            "path": "E:/Github Codes and Projects/Algo_CPP_Files"
         },
         {
             "name": "AutoUI",
             "path": "E:/Github Codes and Projects/Projects/AutoUI"
         },
         {
-            "name": "DescripGen",
-            "path": "E:/Github Codes and Projects/Projects/DescripGen"
+            "name": "SkelAnim",
+            "path": "E:/Github Codes and Projects/Projects/SkelAnim"
         },
         {
-            "name": "TerrainGen",
-            "path": "E:/Github Codes and Projects/Projects/TerrainGen"
-        },
-        {
-            "name": "ARMSIM_Codes",
-            "path": "E:/Github Codes and Projects/ARMSIM_Codes"
-        },
-        {
-            "name": "RandomIdeaOrganiser",
-            "path": "E:/Github Codes and Projects/Projects/RandomIdeaOrganiser"
+            "name": "EmbeddedSystems_Files",
+            "path": "E:/Github Codes and Projects/EmbeddedSystems_Files"
         }
     ]
 }
