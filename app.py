@@ -152,17 +152,17 @@ def UI_DisplayRepoTreeData(repo):
     USEINPUT_Module = repo["modules"][Modules_Keys[Modules_Names.index(USERINPUT_ModuleName)]]
     st.markdown("### " + USEINPUT_Module["name"])
     detailSizeRatio = [1, 3]
-    col1, col2 = st.beta_columns(detailSizeRatio)
+    col1, col2 = st.columns(detailSizeRatio)
     col1.markdown("Module Type:")
     col2.markdown(USEINPUT_Module["type"])
-    col1, col2 = st.beta_columns(detailSizeRatio)
+    col1, col2 = st.columns(detailSizeRatio)
     col1.markdown("Module Heirarchy:")
     col2.markdown('.'.join(USEINPUT_Module["subDir"].split("/") + [USEINPUT_Module["name"]]), unsafe_allow_html=True)
     if USEINPUT_Module["type"] == "local":
-        col1, col2 = st.beta_columns(detailSizeRatio)
+        col1, col2 = st.columns(detailSizeRatio)
         col1.markdown("File Link:")
         col2.markdown("<a href=" + USEINPUT_Module["link"] + ">" + USEINPUT_Module["link"] + "</a>", unsafe_allow_html=True)
-        col1, col2 = st.beta_columns(detailSizeRatio)
+        col1, col2 = st.columns(detailSizeRatio)
         col1.markdown("Dependencies:")
         deps = [repo["modules"][key]["name"] for key in USEINPUT_Module["dependencies"]]
         col2.markdown(', '.join(deps))
@@ -177,7 +177,7 @@ def UI_GetFeatureParams(feature_path, defaults=None, nCols=3):
     params_done = 0
     while(params_done < nChoiceParams):
         params_todo = min(nCols, nChoiceParams-params_done)
-        cols = st.beta_columns(params_todo)
+        cols = st.columns(params_todo)
         for i in range(params_todo):
             choiceDataKey = choiceBasedData_Labels[params_done + i]
             choiceNames = GetNames(choiceBasedData[choiceDataKey]["choices"])
@@ -193,7 +193,7 @@ def UI_GetFeatureParams(feature_path, defaults=None, nCols=3):
     params_done = 0
     while(params_done < nCheckParams):
         params_todo = min(nCols, nCheckParams-params_done)
-        cols = st.beta_columns(params_todo)
+        cols = st.columns(params_todo)
         for i in range(params_todo):
             checkDataKey = checkBasedData_Labels[params_done + i]
             defaultVal = False if defaults is None else defaults["checkBased"][checkDataKey]
@@ -333,7 +333,7 @@ def edit_repo_features():
     specialInputs = UI_GetFeatureParams(USERINPUT_FeatureChoice, specialInputs_Default)
 
     # Process Inputs
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
     bcol1 = col1.empty()
     bcol2 = col2.empty()
     if bcol1.button(ButtonName + " Feature", key="BA1"):
