@@ -213,7 +213,9 @@ def ParseImports_Python(code_path):
         impsDicts = []
         for imp in impG.names:
             name = imp.name.split(".")[-1]
-            module = ".".join([impG.module, imp.name.rstrip(name).rstrip(".")]).rstrip(".")
+            module = imp.name.rstrip(name).rstrip(".")
+            if impG.module is not None:
+                module = ".".join([module, imp.name.rstrip(name).rstrip(".")]).rstrip(".")
             impData = {
                 "parentDir": codeDir,
                 "subDir": "/".join(module.split(".")),
