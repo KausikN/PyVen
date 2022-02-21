@@ -1,6 +1,7 @@
 {
     "common": [
-        "Default/.pyven/"
+        "Default/.pyven/",
+        "Default/.gitignore"
     ],
     "special": {
         "choiceBased": {},
