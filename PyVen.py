@@ -6,7 +6,10 @@ A python importing and packaging tool similar to Maven for Java
 import os
 import json
 import importlib
+import functools
 import ast
+from tqdm import tqdm
+import multiprocessing
 
 # Main Functions
 def SaveData(data, path):
@@ -37,14 +40,24 @@ def UpdateUniqueDependencies(uD, newDeps):
             uD_Updated[subModPath] = GetCompressedDep(dep)
     return uD_Updated
 
-def CheckIfPipModule(moduleName, package):
+def CheckPipModule_Internal(MODULE_PRESENT, moduleName, package):
     try:
         mod_spec_pkg = importlib.util.find_spec(moduleName, package=package)
-        if (mod_spec_pkg is not None): return True
+        if (mod_spec_pkg is not None): MODULE_PRESENT.value = True
         mod_spec_direct = importlib.util.find_spec(package + "." + moduleName, package="")
-        return (mod_spec_direct is not None)
+        MODULE_PRESENT.value = (mod_spec_direct is not None)
     except:
-        return False
+        MODULE_PRESENT.value = False
+
+def CheckIfPipModule(moduleName, package):
+    MODULE_PRESENT = multiprocessing.Value("b", True)
+    p = multiprocessing.Process(target=functools.partial(CheckPipModule_Internal, MODULE_PRESENT, moduleName, package))
+    p.start()
+    p.join(timeout=2.5)
+    if p.is_alive():
+        p.kill()
+        p.join()
+    return bool(MODULE_PRESENT.value)
 
 def SplitPipModule(moduleStr):
     newModuleName = None
@@ -402,7 +415,7 @@ def Repo_FindModules(repo_path, userName="KausikN", display=False):
 
     # Check if all imported modules are local or else mark as inbuilt
     importedModulePaths = list(set(importedModulePaths)) # Remove Duplicates
-    for path in importedModulePaths:
+    for path in tqdm(importedModulePaths):
         if path not in uniqueModules.keys():
             subDir = os.path.split(path)[0].replace("\\", "/").strip("/")
             moduleName = os.path.splitext(os.path.basename(path))[0]
