@@ -370,7 +370,7 @@ def DependencyTree_Compressed_Python(code_path, level=0, display=False):
 ##########################################################################################################################
 
 ### REPO LEVEL PYVEN #####################################################################################################
-def Repo_FindModules(repo_path, userName="KausikN", display=False):
+def Repo_FindModules(repo_path, userName="KausikN", display=False, progressObj=None):
     repoName = repo_path.rstrip("/").split("/")[-1]
 
     CodeFiles = []
@@ -415,6 +415,7 @@ def Repo_FindModules(repo_path, userName="KausikN", display=False):
 
     # Check if all imported modules are local or else mark as inbuilt
     importedModulePaths = list(set(importedModulePaths)) # Remove Duplicates
+    i = 0
     for path in tqdm(importedModulePaths):
         if path not in uniqueModules.keys():
             subDir = os.path.split(path)[0].replace("\\", "/").strip("/")
@@ -430,6 +431,8 @@ def Repo_FindModules(repo_path, userName="KausikN", display=False):
                 "dependencies": [],
             }
             uniqueModules[path] = Module
+        i += 1
+        if progressObj is not None: progressObj.progress(i / len(importedModulePaths))
 
     Repo = {
         "name": repoName,

@@ -8,33 +8,33 @@ import streamlit as st
 import json
 
 # Main Vars
-config = json.load(open('./StreamLitGUI/UIConfig.json', 'r'))
+config = json.load(open("./StreamLitGUI/UIConfig.json", "r"))
 
 # Main Functions
 def main():
     # Create Sidebar
     selected_box = st.sidebar.selectbox(
-    'Choose one of the following',
+    "Choose one of the following",
         tuple(
-            [config['PROJECT_NAME']] + 
-            config['PROJECT_MODES']
+            [config["PROJECT_NAME"]] + 
+            config["PROJECT_MODES"]
         )
     )
     
-    if selected_box == config['PROJECT_NAME']:
+    if selected_box == config["PROJECT_NAME"]:
         HomePage()
     else:
-        correspondingFuncName = selected_box.replace(' ', '_').lower()
+        correspondingFuncName = selected_box.replace(" ", "_").lower()
         if correspondingFuncName in globals().keys():
             globals()[correspondingFuncName]()
  
 
 def HomePage():
-    st.title(config['PROJECT_NAME'])
-    st.markdown('Github Repo: ' + "[" + config['PROJECT_LINK'] + "](" + config['PROJECT_LINK'] + ")")
-    st.markdown(config['PROJECT_DESC'])
+    st.title(config["PROJECT_NAME"])
+    st.markdown("Github Repo: " + "[" + config["PROJECT_LINK"] + "](" + config["PROJECT_LINK"] + ")")
+    st.markdown(config["PROJECT_DESC"])
 
-    # st.write(open(config['PROJECT_README'], 'r').read())
+    # st.write(open(config["PROJECT_README"], "r").read())
 
 #############################################################################################################################
 # Repo Based Vars

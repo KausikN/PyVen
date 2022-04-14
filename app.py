@@ -107,9 +107,10 @@ def SavePyVenModulesMetadata(repo_path, MODULES_DATA):
     json.dump(MODULES_DATA, open(JoinPath(repo_path, ".pyven/modules.json"), 'w'), indent=4)
 
 # Main Functions
-def RebuildModules(REPO_PATH):
-    Modules = PyVen.Repo_FindModules(REPO_PATH)
+def RebuildModules(REPO_PATH, progressObj=None):
+    Modules = PyVen.Repo_FindModules(REPO_PATH, progressObj=progressObj)
     SavePyVenModulesMetadata(REPO_PATH, Modules)
+    return Modules
 
 def UpdateRepoBasicDetails(REPO_PATH, REPO_NAME):
     BasicInfo = json.load(open(JoinPath(REPO_PATH, ".pyven/basic_info.json"), 'r'))
@@ -213,7 +214,7 @@ def UI_CheckPyVenInit(REPO_PATH, REPO_NAME):
             ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, {"choiceBased": {}, "checkBased": {}}, LoaderWidget)
 
             # Update Modules in .pyven
-            RebuildModules(REPO_PATH)
+            RebuildModules(REPO_PATH, progressObj=st.progress(0.0))
 
             # Update basic_info.json
             UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
@@ -271,7 +272,13 @@ def analyse_repo():
     # Load Repo
     REPO_PATH = USERINPUT_RepoChoice["path"]
     REPO_NAME = USERINPUT_RepoChoice["name"]
-    REPO_TREE = PyVen.Repo_FindModules(REPO_PATH)
+
+    if USERINPUT_RebuildPyVenData:
+        REPO_TREE = RebuildModules(REPO_PATH, progressObj=st.sidebar.progress(0.0))
+        UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
+        st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
+    else:
+        REPO_TREE = PyVen.Repo_FindModules(REPO_PATH, progressObj=st.progress(0.0))
 
     # Display Outputs
     UI_DisplayRepoTreeData(REPO_TREE)
@@ -283,11 +290,6 @@ def analyse_repo():
         st.markdown("Repo not initialsed with PyVen.")
     else:
         USERINPUT_AddedFeaturesChoice = st.selectbox("Added Features", ADDED_FEATURES)
-
-    if USERINPUT_RebuildPyVenData:
-        RebuildModules(REPO_PATH)
-        UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
-        st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
 
 def edit_repo_features():
     global FEATURES
@@ -371,7 +373,7 @@ def edit_repo_features():
             USERINPUT_RebuildPyVenData = True
 
     if USERINPUT_RebuildPyVenData:
-        RebuildModules(REPO_PATH)
+        RebuildModules(REPO_PATH, progressObj=st.sidebar.progress(0.0))
         UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
         st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
 

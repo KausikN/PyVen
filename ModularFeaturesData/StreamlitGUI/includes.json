@@ -32,6 +32,12 @@
                 "paths": [
                     "Version_WithCache/StartUI.sh"
                 ]
+            },
+            "GenReqCheck": {
+                "label": "Add Generate Requirements executable?",
+                "paths": [
+                    "Version_WithCache/RequirementGen.sh"
+                ]
             }
         }
     }

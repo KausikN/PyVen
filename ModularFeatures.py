@@ -210,7 +210,8 @@ def ModularFeature_Remove(feature_path, remove_repo_path, DisplayWidget=None, Sa
     # Check Based
     for checkDataKey in FEATURE["includes"]["special"]["checkBased"].keys():
         checkData = FEATURE["includes"]["special"]["checkBased"][checkDataKey]
-        if special_includes_inputs["checkBased"][checkDataKey]:
+        if checkDataKey in special_includes_inputs["checkBased"].keys() \
+            and special_includes_inputs["checkBased"][checkDataKey]:
             fs = checkData["paths"]
             for f in fs:
                 load_f = JoinPath(feature_path, f)
