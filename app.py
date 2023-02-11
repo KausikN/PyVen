@@ -90,7 +90,7 @@ def UpdateRepoBasicDetails(REPO_PATH, REPO_NAME):
     BasicInfo["repo_name"] = REPO_NAME
     requirements = []
     if "requirements.txt" in os.listdir(REPO_PATH):
-        requirements = [line.strip() for line in open(JoinPath(REPO_PATH, "requirements.txt"), 'r').readlines()]
+        requirements = [line.strip() for line in open(JoinPath(REPO_PATH, "requirements.txt"), 'r').readlines() if line.strip() != ""]
     BasicInfo["requirements"] = requirements
     json.dump(BasicInfo, open(JoinPath(REPO_PATH, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["basic_info"]), 'w'), indent=4)
 
