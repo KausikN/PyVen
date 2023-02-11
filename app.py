@@ -4,13 +4,8 @@ Stream lit GUI for hosting PyVen
 
 # Imports
 import os
-import cv2
-import pickle
-import functools
-import numpy as np
-from pkg_resources import require
-import streamlit as st
 import json
+import streamlit as st
 
 import PyVen
 import ModularFeatures
@@ -46,65 +41,43 @@ def HomePage():
 
 #############################################################################################################################
 # Repo Based Vars
-DEFAULT_SAVEPATH_JSON = 'DependencyData/Modules.json'
-FEATURES_PATH = 'ModularFeaturesData/'
-CACHE_PATH = "StreamLitGUI/CacheData/Cache.json"
-
+PATHS = {
+    "cache": "StreamLitGUI/CacheData/Cache.json",
+    "features": "ModularFeaturesData/",
+}
 DEFAULT_FEATURE_NAME_PYVENSTARTER = "PyVenStarter"
+PYVEN_CONFIG = json.load(open("pyven_config.json", "r"))
 
 # Util Vars
 CACHE = {}
 FEATURES = {}
 
 # Util Functions
-def Hex_to_RGB(val):
-    val = val.lstrip('#')
-    lv = len(val)
-    return tuple(int(val[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
-
-def RGB_to_Hex(rgb):
-    return "#{:02x}{:02x}{:02x}".format(rgb[0], rgb[1], rgb[2])
-
 def JoinPath(*ops):
     return os.path.join(*ops).replace("\\", "/")
 
-def GetNames(data):
-    names = []
-    for d in data:
-        names.append(d["name"])
-    return names
-
-def GetNames_Dict(data):
-    names = []
-    keys = []
-    for dk in data.keys():
-        d = data[dk]
-        keys.append(dk)
-        names.append(d["name"])
-    return names, keys
-
 def LoadCache():
     global CACHE
-    CACHE = json.load(open(CACHE_PATH, 'r'))
+    CACHE = json.load(open(PATHS["cache"], 'r'))
 
 def SaveCache():
     global CACHE
-    json.dump(CACHE, open(CACHE_PATH, 'w'), indent=4)
+    json.dump(CACHE, open(PATHS["cache"], 'w'), indent=4)
 
+# Load Functions
 def LoadFeatures():
     global FEATURES
-    for f in os.listdir(FEATURES_PATH):
-        FEATURES[f] = JoinPath(FEATURES_PATH, f)
+    for f in os.listdir(PATHS["features"]): FEATURES[f] = JoinPath(PATHS["features"], f)
 
 def LoadPyVenFeaturesMetadata(repo_path):
-    FEATURES_DATA = json.load(open(JoinPath(repo_path, ".pyven/features.json"), 'r'))
+    FEATURES_DATA = json.load(open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"]), 'r'))
     return FEATURES_DATA
 
 def SavePyVenFeaturesMetadata(repo_path, FEATURES_DATA):
-    json.dump(FEATURES_DATA, open(JoinPath(repo_path, ".pyven/features.json"), 'w'), indent=4)
+    json.dump(FEATURES_DATA, open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"]), 'w'), indent=4)
 
 def SavePyVenModulesMetadata(repo_path, MODULES_DATA):
-    json.dump(MODULES_DATA, open(JoinPath(repo_path, ".pyven/modules.json"), 'w'), indent=4)
+    json.dump(MODULES_DATA, open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["modules"]), 'w'), indent=4)
 
 # Main Functions
 def RebuildModules(REPO_PATH, progressObj=None):
@@ -113,13 +86,13 @@ def RebuildModules(REPO_PATH, progressObj=None):
     return Modules
 
 def UpdateRepoBasicDetails(REPO_PATH, REPO_NAME):
-    BasicInfo = json.load(open(JoinPath(REPO_PATH, ".pyven/basic_info.json"), 'r'))
+    BasicInfo = json.load(open(JoinPath(REPO_PATH, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["basic_info"]), 'r'))
     BasicInfo["repo_name"] = REPO_NAME
     requirements = []
     if "requirements.txt" in os.listdir(REPO_PATH):
         requirements = [line.strip() for line in open(JoinPath(REPO_PATH, "requirements.txt"), 'r').readlines()]
     BasicInfo["requirements"] = requirements
-    json.dump(BasicInfo, open(JoinPath(REPO_PATH, ".pyven/basic_info.json"), 'w'), indent=4)
+    json.dump(BasicInfo, open(JoinPath(REPO_PATH, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["basic_info"]), 'w'), indent=4)
 
 # UI Functions
 def UI_LoadRepos(parentPaths):
@@ -146,7 +119,8 @@ def UI_DisplayRepoTreeData(repo):
     st.markdown("<a href=" + repo["repoLink"] + ">" + repo["repoLink"] + "</a>", unsafe_allow_html=True)
     st.markdown(repo["localPath"])
 
-    Modules_Names, Modules_Keys = GetNames_Dict(repo["modules"])
+    Modules_Keys = list(repo["modules"].keys())
+    Modules_Names = [repo["modules"][k]["name"] for k in Modules_Keys]
     st.markdown("## Modules")
     USERINPUT_ModuleName = st.selectbox("Select Module", ["Select Module"] + Modules_Names)
     if USERINPUT_ModuleName == "Select Module": return
@@ -181,7 +155,7 @@ def UI_GetFeatureParams(feature_path, defaults=None, nCols=3):
         cols = st.columns(params_todo)
         for i in range(params_todo):
             choiceDataKey = choiceBasedData_Labels[params_done + i]
-            choiceNames = GetNames(choiceBasedData[choiceDataKey]["choices"])
+            choiceNames = [choiceBasedData[choiceDataKey]["choices"][k] for k in choiceBasedData[choiceDataKey]["choices"].keys()]
             defaultVal = 0 if defaults is None else defaults["choiceBased"][choiceDataKey]
             inp = cols[i].selectbox(choiceBasedData[choiceDataKey]["label"], choiceNames, index=defaultVal)
             inp_index = choiceNames.index(inp)
@@ -205,7 +179,7 @@ def UI_GetFeatureParams(feature_path, defaults=None, nCols=3):
     return specialInputs
 
 def UI_CheckPyVenInit(REPO_PATH, REPO_NAME):
-    if ".pyven" not in os.listdir(REPO_PATH):
+    if PYVEN_CONFIG["pyven_dir"] not in os.listdir(REPO_PATH):
         InitButton = st.empty()
         if InitButton.button("Initialise PyVen for the Repo"):
             # Add PyVen Starter Feature
@@ -213,7 +187,7 @@ def UI_CheckPyVenInit(REPO_PATH, REPO_NAME):
             LoaderWidget = st.empty()
             ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, {"choiceBased": {}, "checkBased": {}}, LoaderWidget)
 
-            # Update Modules in .pyven
+            # Update Modules in pyven_dir
             RebuildModules(REPO_PATH, progressObj=st.progress(0.0))
 
             # Update basic_info.json
@@ -238,7 +212,7 @@ def UI_SearchModePrune(REPO_DATAS, REPO_NAMES):
         REPO_DATAS_PRUNED, REPO_NAMES_PRUNED = [], []
         for repo in REPO_DATAS:
             repo_path = repo["path"]
-            if ".pyven" not in os.listdir(repo_path): # Repo not initialised with pyven
+            if PYVEN_CONFIG["pyven_dir"] not in os.listdir(repo_path): # Repo not initialised with pyven
                 continue
             features_data = LoadPyVenFeaturesMetadata(repo_path)
             features_names = list(features_data["added_features"].keys())
@@ -256,7 +230,7 @@ def analyse_repo():
 
     LoadCache()
     LoadFeatures()
-    REPO_NAMES = GetNames(CACHE["GIT_REPOS"])
+    REPO_NAMES = [repo["name"] for repo in CACHE["GIT_REPOS"]]
     REPO_DATAS = CACHE["GIT_REPOS"]
 
     # Load Inputs
@@ -299,7 +273,7 @@ def edit_repo_features():
 
     LoadCache()
     LoadFeatures()
-    REPO_NAMES = GetNames(CACHE["GIT_REPOS"])
+    REPO_NAMES = [repo["name"] for repo in CACHE["GIT_REPOS"]]
     REPO_DATAS = CACHE["GIT_REPOS"]
 
     # Load Inputs
@@ -319,7 +293,7 @@ def edit_repo_features():
     if USERINPUT_FeatureChoiceName == "Select Feature": return
     USERINPUT_FeatureChoice = FEATURES[USERINPUT_FeatureChoiceName]
 
-    features_pyven_repo_path = JoinPath(REPO_PATH, ".pyven/features.json")
+    features_pyven_repo_path = JoinPath(REPO_PATH, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"])
     added_features_data = json.load(open(features_pyven_repo_path, 'r'))["added_features"]
     ButtonName = "Add"
     featureExists = False

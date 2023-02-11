@@ -1,0 +1,9 @@
+{
+    "pyven_dir": ".pyven",
+    "pyven_files": {
+        "basic_info": "basic_info.json",
+        "common_host_data": "common_host_data.json",
+        "features": "features.json",
+        "modules": "modules.json"
+    }
+}

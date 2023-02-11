@@ -84,7 +84,6 @@ def GetAllLocalRepos(parent_path):
             else:
                 repo_list.extend(GetAllLocalRepos(os.path.join(parent_path, repo)))
     return repo_list
-            
 
 ### Imports Parsers ######################################################################################################
 def ParseImports_Python_Regex(code_path):
@@ -442,23 +441,3 @@ def Repo_FindModules(repo_path, userName="KausikN", display=False, progressObj=N
     }
 
     return Repo
-##########################################################################################################################
-
-# Driver Code
-# # Params
-# userName = "KausikN"
-# repoPath = "E:/Github Codes and Projects/Projects/VidFX/"
-# savePath = "DependencyData/PyVenTree_VidFX.json"
-# # Params
-
-# # print(CheckIfPipModule("semantic_segmentation", "pixellib.semantic"))
-# # print(CheckIfPipModule("semantic", "pixellib"))
-# # print(CheckIfPipModule("pixellib", ""))
-# # quit()
-
-# # RunCode
-# print(repoPath)
-# print("Computing Repo Tree...")
-# Repo = Repo_FindModules(repoPath, userName=userName, display=True)
-
-# SaveData(Repo, savePath)

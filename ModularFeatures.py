@@ -47,7 +47,8 @@ import os
 import json
 import shutil
 
-import streamlit as st
+# Main Vars
+PYVEN_CONFIG = json.load(open("pyven_config.json", "r"))
 
 # Util Functions
 def JoinPath(*ops):
@@ -118,10 +119,10 @@ def CascadeRemovePath(path, remove_parent, remove_path, checkEdited=False):
 
 # Main Functions
 def ModularFeature_Check(repo_path):
-    if ".pyven" not in os.listdir(repo_path):
+    if PYVEN_CONFIG["pyven_dir"] not in os.listdir(repo_path):
         return None
     else:
-        ADDED_FEATURES = json.load(open(JoinPath(repo_path, ".pyven/features.json"), 'r'))["added_features"]
+        ADDED_FEATURES = json.load(open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"]), 'r'))["added_features"]
         return ADDED_FEATURES
 
 def ModularFeature_Load(feature_path):
@@ -180,7 +181,7 @@ def ModularFeature_Remove(feature_path, remove_repo_path, DisplayWidget=None, Sa
     FEATURE = ModularFeature_Load(feature_path)
 
     # Get Special Inputs used
-    features_pyven_repo_path = JoinPath(remove_repo_path, ".pyven/features.json")
+    features_pyven_repo_path = JoinPath(remove_repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"])
     added_features_data = json.load(open(features_pyven_repo_path, 'r'))["added_features"]
     if feature_name not in added_features_data.keys():
         if DisplayWidget is not None: DisplayWidget.markdown("Feature " + feature_name + " not added to " + remove_repo_name + ".")
