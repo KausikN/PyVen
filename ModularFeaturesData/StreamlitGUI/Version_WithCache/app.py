@@ -38,7 +38,9 @@ def HomePage():
 
 #############################################################################################################################
 # Repo Based Vars
-CACHE_PATH = "StreamLitGUI/CacheData/Cache.json"
+PATHS = {
+    "cache": "StreamLitGUI/CacheData/Cache.json",
+}
 
 # Util Vars
 CACHE = {}
@@ -46,11 +48,11 @@ CACHE = {}
 # Util Functions
 def LoadCache():
     global CACHE
-    CACHE = json.load(open(CACHE_PATH, "r"))
+    CACHE = json.load(open(PATHS["cache"], "r"))
 
 def SaveCache():
     global CACHE
-    json.dump(CACHE, open(CACHE_PATH, "w"), indent=4)
+    json.dump(CACHE, open(PATHS["cache"], "w"), indent=4)
 
 # Main Functions
 
