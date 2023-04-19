@@ -155,7 +155,8 @@ def UI_GetFeatureParams(feature_path, defaults=None, nCols=3):
         cols = st.columns(params_todo)
         for i in range(params_todo):
             choiceDataKey = choiceBasedData_Labels[params_done + i]
-            choiceNames = [choiceBasedData[choiceDataKey]["choices"][k] for k in choiceBasedData[choiceDataKey]["choices"].keys()]
+            # choiceNames = [choiceBasedData[choiceDataKey]["choices"][k] for k in choiceBasedData[choiceDataKey]["choices"].keys()]
+            choiceNames = [k["name"] for k in choiceBasedData[choiceDataKey]["choices"]]
             defaultVal = 0 if defaults is None else defaults["choiceBased"][choiceDataKey]
             inp = cols[i].selectbox(choiceBasedData[choiceDataKey]["label"], choiceNames, index=defaultVal)
             inp_index = choiceNames.index(inp)
