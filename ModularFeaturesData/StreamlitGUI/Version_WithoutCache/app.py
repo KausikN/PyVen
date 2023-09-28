@@ -33,7 +33,6 @@ def HomePage():
     st.title(config["PROJECT_NAME"])
     st.markdown("Github Repo: " + "[" + config["PROJECT_LINK"] + "](" + config["PROJECT_LINK"] + ")")
     st.markdown(config["PROJECT_DESC"])
-
     # st.write(open(config["PROJECT_README"], "r").read())
 
 #############################################################################################################################

@@ -8,36 +8,35 @@ import json
 import streamlit as st
 
 import PyVen
-import ModularFeatures
+from ModularFeatures import *
 
 # Main Vars
-config = json.load(open('./StreamLitGUI/UIConfig.json', 'r'))
+config = json.load(open("./StreamLitGUI/UIConfig.json", "r"))
 
 # Main Functions
 def main():
     # Create Sidebar
     selected_box = st.sidebar.selectbox(
-    'Choose one of the following',
+    "Choose one of the following",
         tuple(
-            [config['PROJECT_NAME']] + 
-            config['PROJECT_MODES']
+            [config["PROJECT_NAME"]] + 
+            config["PROJECT_MODES"]
         )
     )
     
-    if selected_box == config['PROJECT_NAME']:
+    if selected_box == config["PROJECT_NAME"]:
         HomePage()
     else:
-        correspondingFuncName = selected_box.replace(' ', '_').lower()
+        correspondingFuncName = selected_box.replace(" ", "_").lower()
         if correspondingFuncName in globals().keys():
             globals()[correspondingFuncName]()
  
 
 def HomePage():
-    st.title(config['PROJECT_NAME'])
-    st.markdown('Github Repo: ' + "[" + config['PROJECT_LINK'] + "](" + config['PROJECT_LINK'] + ")")
-    st.markdown(config['PROJECT_DESC'])
-
-    # st.write(open(config['PROJECT_README'], 'r').read())
+    st.title(config["PROJECT_NAME"])
+    st.markdown("Github Repo: " + "[" + config["PROJECT_LINK"] + "](" + config["PROJECT_LINK"] + ")")
+    st.markdown(config["PROJECT_DESC"])
+    # st.write(open(config["PROJECT_README"], "r").read())
 
 #############################################################################################################################
 # Repo Based Vars
@@ -46,154 +45,192 @@ PATHS = {
     "features": "ModularFeaturesData/",
 }
 DEFAULT_FEATURE_NAME_PYVENSTARTER = "PyVenStarter"
-PYVEN_CONFIG = json.load(open("pyven_config.json", "r"))
 
 # Util Vars
 CACHE = {}
 FEATURES = {}
 
 # Util Functions
-def JoinPath(*ops):
-    return os.path.join(*ops).replace("\\", "/")
-
 def LoadCache():
+    '''
+    Load Cache
+    '''
     global CACHE
-    CACHE = json.load(open(PATHS["cache"], 'r'))
+    CACHE = json.load(open(PATHS["cache"], "r"))
 
 def SaveCache():
+    '''
+    Save Cache
+    '''
     global CACHE
-    json.dump(CACHE, open(PATHS["cache"], 'w'), indent=4)
+    json.dump(CACHE, open(PATHS["cache"], "w"), indent=4)
 
 # Load Functions
 def LoadFeatures():
+    '''
+    Load Features
+    '''
     global FEATURES
     for f in os.listdir(PATHS["features"]): FEATURES[f] = JoinPath(PATHS["features"], f)
 
 def LoadPyVenFeaturesMetadata(repo_path):
-    FEATURES_DATA = json.load(open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"]), 'r'))
-    return FEATURES_DATA
+    '''
+    Load PyVen Features Metadata
+    '''
+    return json.load(open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"]), "r"))
 
 def SavePyVenFeaturesMetadata(repo_path, FEATURES_DATA):
-    json.dump(FEATURES_DATA, open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"]), 'w'), indent=4)
+    '''
+    Save PyVen Features Metadata
+    '''
+    json.dump(FEATURES_DATA, open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"]), "w"), indent=4)
 
 def SavePyVenModulesMetadata(repo_path, MODULES_DATA):
-    json.dump(MODULES_DATA, open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["modules"]), 'w'), indent=4)
+    '''
+    Save PyVen Modules Metadata
+    '''
+    json.dump(MODULES_DATA, open(JoinPath(repo_path, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["modules"]), "w"), indent=4)
 
 # Main Functions
-def RebuildModules(REPO_PATH, progressObj=None):
-    Modules = PyVen.Repo_FindModules(REPO_PATH, progressObj=progressObj)
-    SavePyVenModulesMetadata(REPO_PATH, Modules)
-    return Modules
+def RebuildModules(REPO_PATH, PROGRESS_OBJ=None):
+    '''
+    Rebuild Modules
+    '''
+    MODULES = PyVen.Repo_FindModules(REPO_PATH, PROGRESS_OBJ=PROGRESS_OBJ)
+    SavePyVenModulesMetadata(REPO_PATH, MODULES)
+    return MODULES
 
 def UpdateRepoBasicDetails(REPO_PATH, REPO_NAME):
-    BasicInfo = json.load(open(JoinPath(REPO_PATH, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["basic_info"]), 'r'))
+    '''
+    Update Repo Basic Details
+    '''
+    BasicInfo = json.load(open(JoinPath(REPO_PATH, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["basic_info"]), "r"))
     BasicInfo["repo_name"] = REPO_NAME
     requirements = []
     if "requirements.txt" in os.listdir(REPO_PATH):
-        requirements = [line.strip() for line in open(JoinPath(REPO_PATH, "requirements.txt"), 'r').readlines() if line.strip() != ""]
+        requirements = [line.strip() for line in open(JoinPath(REPO_PATH, "requirements.txt"), "r").readlines() if line.strip() != ""]
     BasicInfo["requirements"] = requirements
-    json.dump(BasicInfo, open(JoinPath(REPO_PATH, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["basic_info"]), 'w'), indent=4)
+    json.dump(BasicInfo, open(JoinPath(REPO_PATH, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["basic_info"]), "w"), indent=4)
 
 # UI Functions
-def UI_LoadRepos(parentPaths):
-    pathCount = len(parentPaths)
-
+def UI_LoadRepos(parent_paths):
+    '''
+    UI - Load Repos
+    '''
+    # Init
+    path_count = len(parent_paths)
+    # Load Repos
     LoaderText = st.empty()
     REPO_PATHS = []
     i = 0
-    for parentPath in parentPaths:
-        repoPaths = PyVen.GetAllLocalRepos(parentPath)
-        REPO_PATHS.extend(repoPaths)
+    for parent_path in parent_paths:
+        ## Load Local Repos
+        repo_paths = PyVen.Repo_GetLocalRepos(parent_path)
+        REPO_PATHS.extend(repo_paths)
+        ## Update
         i += 1
-        LoaderText.markdown("[" + str(i) + " / " + str(pathCount) + "] Loaded " + parentPath)
+        LoaderText.markdown("[" + str(i) + " / " + str(path_count) + "] Loaded " + parent_path)
+    # Remove Duplicates
     REPO_PATHS = list(set(REPO_PATHS))
     LoaderText.markdown("Loaded " + str(len(REPO_PATHS)) + " repos.")
+    # Form Repo Data
     REPO_DATAS = [{
-        "name": os.path.split(repoPath.rstrip("/"))[-1],
-        "path": repoPath
-    } for repoPath in REPO_PATHS]
+        "name": os.path.split(repo_path.rstrip("/"))[-1],
+        "path": repo_path
+    } for repo_path in REPO_PATHS]
+
     return REPO_DATAS
 
 def UI_DisplayRepoTreeData(repo):
+    '''
+    UI - Display Repo Tree Data
+    '''
+    # Display Repo Details
     st.markdown("## " + repo["name"])
-    st.markdown("<a href=" + repo["repoLink"] + ">" + repo["repoLink"] + "</a>", unsafe_allow_html=True)
-    st.markdown(repo["localPath"])
-
-    Modules_Keys = list(repo["modules"].keys())
-    Modules_Names = [repo["modules"][k]["name"] for k in Modules_Keys]
+    st.markdown("<a href=" + repo["repo_link"] + ">" + repo["repo_link"] + "</a>", unsafe_allow_html=True)
+    st.markdown(repo["local_path"])
+    # Display Modules
+    modules_keys = list(repo["modules"].keys())
+    modules_names = [repo["modules"][k]["name"] for k in modules_keys]
     st.markdown("## Modules")
-    USERINPUT_ModuleName = st.selectbox("Select Module", ["Select Module"] + Modules_Names)
+    USERINPUT_ModuleName = st.selectbox("Select Module", ["Select Module"] + modules_names)
     if USERINPUT_ModuleName == "Select Module": return
-    USEINPUT_Module = repo["modules"][Modules_Keys[Modules_Names.index(USERINPUT_ModuleName)]]
+    USEINPUT_Module = repo["modules"][modules_keys[modules_names.index(USERINPUT_ModuleName)]]
     st.markdown("### " + USEINPUT_Module["name"])
-    detailSizeRatio = [1, 3]
-    col1, col2 = st.columns(detailSizeRatio)
+    detail_size_ratio = [1, 3]
+    col1, col2 = st.columns(detail_size_ratio)
     col1.markdown("Module Type:")
     col2.markdown(USEINPUT_Module["type"])
-    col1, col2 = st.columns(detailSizeRatio)
+    col1, col2 = st.columns(detail_size_ratio)
     col1.markdown("Module Heirarchy:")
-    col2.markdown('.'.join(USEINPUT_Module["subDir"].split("/") + [USEINPUT_Module["name"]]), unsafe_allow_html=True)
+    col2.markdown(".".join(USEINPUT_Module["sub_dir"].split("/") + [USEINPUT_Module["name"]]), unsafe_allow_html=True)
     if USEINPUT_Module["type"] == "local":
-        col1, col2 = st.columns(detailSizeRatio)
+        col1, col2 = st.columns(detail_size_ratio)
         col1.markdown("File Link:")
         col2.markdown("<a href=" + USEINPUT_Module["link"] + ">" + USEINPUT_Module["link"] + "</a>", unsafe_allow_html=True)
-        col1, col2 = st.columns(detailSizeRatio)
+        col1, col2 = st.columns(detail_size_ratio)
         col1.markdown("Dependencies:")
         deps = [repo["modules"][key]["name"] for key in USEINPUT_Module["dependencies"]]
-        col2.markdown(', '.join(deps))
+        col2.markdown(", ".join(deps))
 
-def UI_GetFeatureParams(feature_path, defaults=None, nCols=3):
-    includes = json.load(open(JoinPath(feature_path, "includes.json"), 'r'))
-    specialInputs = {"choiceBased": {}, "checkBased": {}}
+def UI_GetFeatureParams(feature_path, defaults=None, NCOLS=3):
+    '''
+    UI - Get Feature Params
+    '''
+    # Load Feature Includes
+    includes = json.load(open(JoinPath(feature_path, "includes.json"), "r"))
+    special_inputs = {"choice_based": {}, "check_based": {}}
     # Choice Based
-    choiceBasedData = includes["special"]["choiceBased"]
-    nChoiceParams = len(choiceBasedData.keys())
-    choiceBasedData_Labels = list(choiceBasedData.keys())
+    choice_based_data = includes["special"]["choice_based"]
+    n_choice_params = len(choice_based_data.keys())
+    choice_based_data_labels = list(choice_based_data.keys())
     params_done = 0
-    while(params_done < nChoiceParams):
-        params_todo = min(nCols, nChoiceParams-params_done)
+    while(params_done < n_choice_params):
+        params_todo = min(NCOLS, n_choice_params-params_done)
         cols = st.columns(params_todo)
         for i in range(params_todo):
-            choiceDataKey = choiceBasedData_Labels[params_done + i]
-            # choiceNames = [choiceBasedData[choiceDataKey]["choices"][k] for k in choiceBasedData[choiceDataKey]["choices"].keys()]
-            choiceNames = [k["name"] for k in choiceBasedData[choiceDataKey]["choices"]]
-            defaultVal = 0 if defaults is None else defaults["choiceBased"][choiceDataKey]
-            inp = cols[i].selectbox(choiceBasedData[choiceDataKey]["label"], choiceNames, index=defaultVal)
-            inp_index = choiceNames.index(inp)
-            specialInputs["choiceBased"][choiceDataKey] = inp_index
+            choice_data_key = choice_based_data_labels[params_done + i]
+            # choice_names = [choice_based_data[choice_data_key]["choices"][k] for k in choice_based_data[choice_data_key]["choices"].keys()]
+            choice_names = [k["name"] for k in choice_based_data[choice_data_key]["choices"]]
+            default_val = 0 if defaults is None else defaults["choice_based"][choice_data_key]
+            inp = cols[i].selectbox(choice_based_data[choice_data_key]["label"], choice_names, index=default_val)
+            inp_index = choice_names.index(inp)
+            special_inputs["choice_based"][choice_data_key] = inp_index
         params_done += params_todo
     # Check Based
-    checkBasedData = includes["special"]["checkBased"]
-    nCheckParams = len(checkBasedData.keys())
-    checkBasedData_Labels = list(checkBasedData.keys())
+    check_based_data = includes["special"]["check_based"]
+    n_check_params = len(check_based_data.keys())
+    check_based_data_labels = list(check_based_data.keys())
     params_done = 0
-    while(params_done < nCheckParams):
-        params_todo = min(nCols, nCheckParams-params_done)
+    while(params_done < n_check_params):
+        params_todo = min(NCOLS, n_check_params-params_done)
         cols = st.columns(params_todo)
         for i in range(params_todo):
-            checkDataKey = checkBasedData_Labels[params_done + i]
-            defaultVal = False if defaults is None else defaults["checkBased"][checkDataKey]
-            inp = st.checkbox(checkBasedData[checkDataKey]["label"], defaultVal)
-            specialInputs["checkBased"][checkDataKey] = inp
+            check_data_key = check_based_data_labels[params_done + i]
+            default_val = False if defaults is None else defaults["check_based"][check_data_key]
+            inp = st.checkbox(check_based_data[check_data_key]["label"], default_val)
+            special_inputs["check_based"][check_data_key] = inp
         params_done += params_todo
     
-    return specialInputs
+    return special_inputs
 
 def UI_CheckPyVenInit(REPO_PATH, REPO_NAME):
+    '''
+    UI - Check PyVen Init
+    '''
+    # Check if PyVen Initialised in repo
     if PYVEN_CONFIG["pyven_dir"] not in os.listdir(REPO_PATH):
         InitButton = st.empty()
         if InitButton.button("Initialise PyVen for the Repo"):
-            # Add PyVen Starter Feature
+            ## Add PyVen Starter Feature
             USERINPUT_FeatureChoice = FEATURES[DEFAULT_FEATURE_NAME_PYVENSTARTER]
             LoaderWidget = st.empty()
-            ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, {"choiceBased": {}, "checkBased": {}}, LoaderWidget)
-
-            # Update Modules in pyven_dir
-            RebuildModules(REPO_PATH, progressObj=st.progress(0.0))
-
-            # Update basic_info.json
+            ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, {"choice_based": {}, "check_based": {}}, LoaderWidget)
+            ## Update Modules in pyven_dir
+            RebuildModules(REPO_PATH, PROGRESS_OBJ=st.progress(0.0))
+            ## Update basic_info.json
             UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
-            
+            ## Display
             LoaderWidget.markdown("Repo initialised with PyVen!")
             InitButton.markdown("")
             return True
@@ -202,8 +239,11 @@ def UI_CheckPyVenInit(REPO_PATH, REPO_NAME):
     return True
 
 def UI_SearchModePrune(REPO_DATAS, REPO_NAMES):
+    '''
+    UI - Search Mode Prune
+    '''
     global FEATURES
-
+    # Search Mode
     USERINPUT_SearchMode = st.selectbox("Search Mode", ["Search by Repo Name", "Search by Added Features"])
     if USERINPUT_SearchMode == "Search by Repo Name":
         return REPO_DATAS, REPO_NAMES
@@ -249,18 +289,18 @@ def analyse_repo():
     REPO_NAME = USERINPUT_RepoChoice["name"]
 
     if USERINPUT_RebuildPyVenData:
-        REPO_TREE = RebuildModules(REPO_PATH, progressObj=st.sidebar.progress(0.0))
+        REPO_TREE = RebuildModules(REPO_PATH, PROGRESS_OBJ=st.sidebar.progress(0.0))
         UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
         st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
     else:
-        REPO_TREE = PyVen.Repo_FindModules(REPO_PATH, progressObj=st.progress(0.0))
+        REPO_TREE = PyVen.Repo_FindModules(REPO_PATH, PROGRESS_OBJ=st.progress(0.0))
 
     # Display Outputs
     UI_DisplayRepoTreeData(REPO_TREE)
 
     # Check if PyVen Features Added
     st.markdown("## Features Added")
-    ADDED_FEATURES = ModularFeatures.ModularFeature_Check(REPO_PATH)
+    ADDED_FEATURES = ModularFeature_Check(REPO_PATH)
     if ADDED_FEATURES is None:
         st.markdown("Repo not initialsed with PyVen.")
     else:
@@ -295,63 +335,62 @@ def edit_repo_features():
     USERINPUT_FeatureChoice = FEATURES[USERINPUT_FeatureChoiceName]
 
     features_pyven_repo_path = JoinPath(REPO_PATH, PYVEN_CONFIG["pyven_dir"], PYVEN_CONFIG["pyven_files"]["features"])
-    added_features_data = json.load(open(features_pyven_repo_path, 'r'))["added_features"]
-    ButtonName = "Add"
-    featureExists = False
-    specialInputs_Default = None
+    added_features_data = json.load(open(features_pyven_repo_path, "r"))["added_features"]
+    button_name = "Add"
+    feature_exists = False
+    special_inputs_default = None
     if USERINPUT_FeatureChoiceName not in added_features_data.keys():
         st.markdown("Feature " + USERINPUT_FeatureChoiceName + " not yet added to " + REPO_NAME + ".")
     else:
         st.markdown("Feature " + USERINPUT_FeatureChoiceName + " already added in " + REPO_NAME + ".")
-        ButtonName = "Update"
-        featureExists = True
-        # specialInputs_Default = added_features_data[USERINPUT_FeatureChoiceName]["special"] # Commented as this messes up the UI
+        button_name = "Update"
+        feature_exists = True
+        # special_inputs_default = added_features_data[USERINPUT_FeatureChoiceName]["special"] # Commented as this messes up the UI
 
-    specialInputs = UI_GetFeatureParams(USERINPUT_FeatureChoice, specialInputs_Default)
+    special_inputs = UI_GetFeatureParams(USERINPUT_FeatureChoice, special_inputs_default)
 
     # Process Inputs
     col1, col2 = st.columns(2)
     bcol1 = col1.empty()
     bcol2 = col2.empty()
-    if bcol1.button(ButtonName + " Feature", key="BA1"):
+    if bcol1.button(button_name + " Feature", key="BA1"):
         LoaderWidget = st.empty()
-        if featureExists:
-            ModularFeatures.ModularFeature_Remove(USERINPUT_FeatureChoice, REPO_PATH, LoaderWidget, USERINPUT_SafeUpdate)
-        ModularFeatures.ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, specialInputs, LoaderWidget, USERINPUT_SafeUpdate)
+        if feature_exists:
+            ModularFeature_Remove(USERINPUT_FeatureChoice, REPO_PATH, LoaderWidget, USERINPUT_SafeUpdate)
+        ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, special_inputs, LoaderWidget, USERINPUT_SafeUpdate)
         LoaderWidget.markdown("Feature Added!")
 
         # Save PyVen Metadata for the repo after adding the feature
         FEATURES_DATA = LoadPyVenFeaturesMetadata(REPO_PATH)
         FEATURES_DATA["added_features"][USERINPUT_FeatureChoiceName] = {
             "name": USERINPUT_FeatureChoiceName,
-            "special": specialInputs
+            "special": special_inputs
         }
         SavePyVenFeaturesMetadata(REPO_PATH, FEATURES_DATA)
-        featureExists = True
-        ButtonName = "Update"
-        bcol1.button(ButtonName + " Feature", key="BU")
+        feature_exists = True
+        button_name = "Update"
+        bcol1.button(button_name + " Feature", key="BU")
         USERINPUT_RebuildPyVenData = True
     
-    if featureExists:
+    if feature_exists:
         if bcol2.button("Remove Feature"):
             LoaderWidget = st.empty()
-            ModularFeatures.ModularFeature_Remove(USERINPUT_FeatureChoice, REPO_PATH, LoaderWidget, USERINPUT_SafeUpdate)
+            ModularFeature_Remove(USERINPUT_FeatureChoice, REPO_PATH, LoaderWidget, USERINPUT_SafeUpdate)
 
             # Save PyVen Metadata for the repo after removing the feature
             FEATURES_DATA = LoadPyVenFeaturesMetadata(REPO_PATH)
             FEATURES_DATA["added_features"].pop(USERINPUT_FeatureChoiceName)
             SavePyVenFeaturesMetadata(REPO_PATH, FEATURES_DATA)
-            featureExists = False
-            ButtonName = "Add"
-            bcol1.button(ButtonName + " Feature", key="BA2")
+            feature_exists = False
+            button_name = "Add"
+            bcol1.button(button_name + " Feature", key="BA2")
             bcol2.markdown("")
             USERINPUT_RebuildPyVenData = True
 
     if USERINPUT_RebuildPyVenData:
-        RebuildModules(REPO_PATH, progressObj=st.sidebar.progress(0.0))
+        RebuildModules(REPO_PATH, PROGRESS_OBJ=st.sidebar.progress(0.0))
         UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
         st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
-
 
 def settings():
     global CACHE
@@ -363,10 +402,10 @@ def settings():
 
     # Load Inputs
     st.markdown("## Git Repo Paths")
-    USERINPUT_GitRepoPathsText = st.text_area("Enter Git Repo Search Dirs", '\n'.join(CACHE["PATHS_PARENT_GIT"]))
+    USERINPUT_GitRepoPathsText = st.text_area("Enter Git Repo Search Dirs", "\n".join(CACHE["PATHS_PARENT_GIT"]))
 
     # Process Inputs
-    USERINPUT_GitRepoPaths = USERINPUT_GitRepoPathsText.split('\n')
+    USERINPUT_GitRepoPaths = USERINPUT_GitRepoPathsText.split("\n")
 
     # Display Outputs
     if st.button("Save"):

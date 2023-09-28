@@ -33,7 +33,6 @@ def HomePage():
     st.title(config["PROJECT_NAME"])
     st.markdown("Github Repo: " + "[" + config["PROJECT_LINK"] + "](" + config["PROJECT_LINK"] + ")")
     st.markdown(config["PROJECT_DESC"])
-
     # st.write(open(config["PROJECT_README"], "r").read())
 
 #############################################################################################################################
@@ -47,10 +46,16 @@ CACHE = {}
 
 # Util Functions
 def LoadCache():
+    '''
+    Load Cache
+    '''
     global CACHE
     CACHE = json.load(open(PATHS["cache"], "r"))
 
 def SaveCache():
+    '''
+    Save Cache
+    '''
     global CACHE
     json.dump(CACHE, open(PATHS["cache"], "w"), indent=4)
 
