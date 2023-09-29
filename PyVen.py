@@ -67,14 +67,15 @@ def Pip_CheckModule_ProcessFunc(MODULE_PRESENT, module_name, package):
         ## Eg: package = "tensorflow", module_name = "keras"
         mod_spec_pkg = importlib.util.find_spec(module_name, package=package)
         if (mod_spec_pkg is not None): MODULE_PRESENT.value = True
-        # Check if module is present in pip in local environment directly
-        ## Eg: package = "", module_name = "tensorflow"
-        mod_spec_direct = importlib.util.find_spec(package + "." + module_name, package="")
-        MODULE_PRESENT.value = (mod_spec_direct is not None)
+        else:
+            # Check if module is present in pip in local environment directly
+            ## Eg: package = "", module_name = "tensorflow"
+            mod_spec_direct = importlib.util.find_spec(package + "." + module_name, package="")
+            MODULE_PRESENT.value = (mod_spec_direct is not None)
     except:
         MODULE_PRESENT.value = False
 
-def Pip_CheckModule(module_name, package, timeout=2.5):
+def Pip_CheckModule(module_name, package, timeout=5.0):
     '''
     Pip - Check Module
     '''

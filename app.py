@@ -138,6 +138,8 @@ def UI_LoadRepos(parent_paths):
         "name": os.path.split(repo_path.rstrip("/"))[-1],
         "path": repo_path
     } for repo_path in REPO_PATHS]
+    ## Sort Repo Data based on name
+    REPO_DATAS = sorted(REPO_DATAS, key=lambda x: x["name"])
 
     return REPO_DATAS
 
@@ -265,6 +267,7 @@ def UI_SearchModePrune(REPO_DATAS, REPO_NAMES):
 # Repo Based Functions
 def analyse_repo():
     global FEATURES
+    global CACHE
 
     # Title
     st.header("Analyse Local Repo")
@@ -292,8 +295,10 @@ def analyse_repo():
         REPO_TREE = RebuildModules(REPO_PATH, PROGRESS_OBJ=st.sidebar.progress(0.0))
         UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
         st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
-    else:
+    elif not (REPO_NAME == CACHE["analyse_repo_current"]["name"]):
         REPO_TREE = PyVen.Repo_FindModules(REPO_PATH, PROGRESS_OBJ=st.progress(0.0))
+    else:
+        REPO_TREE = CACHE["analyse_repo_current"]["repo_tree"]
 
     # Display Outputs
     UI_DisplayRepoTreeData(REPO_TREE)
@@ -302,9 +307,15 @@ def analyse_repo():
     st.markdown("## Features Added")
     ADDED_FEATURES = ModularFeature_Check(REPO_PATH)
     if ADDED_FEATURES is None:
-        st.markdown("Repo not initialsed with PyVen.")
+        st.warning("Repo not initialsed with PyVen.")
     else:
         USERINPUT_AddedFeaturesChoice = st.selectbox("Added Features", ADDED_FEATURES)
+
+    # Save Cache
+    if not (REPO_NAME == CACHE["analyse_repo_current"]):
+        CACHE["analyse_repo_current"]["name"] = REPO_NAME
+        CACHE["analyse_repo_current"]["repo_tree"] = REPO_TREE
+        SaveCache()
 
 def edit_repo_features():
     global FEATURES
