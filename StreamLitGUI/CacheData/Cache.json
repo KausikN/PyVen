@@ -278,21 +278,21 @@
                     "parent_dir": "E:/Github Codes and Projects/Projects/EasyInit",
                     "sub_dir": "",
                     "dependencies": [
+                        "json.py",
                         "os.py",
-                        "streamlit.py",
-                        "json.py"
+                        "streamlit.py"
                     ]
                 },
-                "os.py": {
-                    "name": "os",
+                "json.py": {
+                    "name": "json",
                     "type": "inbuilt",
                     "link": "",
                     "parent_dir": "E:/Github Codes and Projects/Projects/EasyInit",
                     "sub_dir": "",
                     "dependencies": []
                 },
-                "json.py": {
-                    "name": "json",
+                "os.py": {
+                    "name": "os",
                     "type": "inbuilt",
                     "link": "",
                     "parent_dir": "E:/Github Codes and Projects/Projects/EasyInit",

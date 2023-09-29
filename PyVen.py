@@ -488,6 +488,8 @@ def Repo_FindModules(repo_path, user_name="KausikN", display=False, PROGRESS_OBJ
             if os.path.exists(abs_path): 
                 path = os.path.join(sub_dir, path).replace("\\", "/")
             ImportPaths.append(path)
+        ## Sort Dependencies
+        ImportPaths = sorted(ImportPaths)
         ## Form Module
         module_link = "https://github.com/" + user_name + "/" + repo_name + "/blob/master/" + sub_dir + "/" + module_name + ".py"
         if sub_dir == "": module_link = "https://github.com/" + user_name + "/" + repo_name + "/blob/master/" + module_name + ".py"
@@ -524,6 +526,8 @@ def Repo_FindModules(repo_path, user_name="KausikN", display=False, PROGRESS_OBJ
         ## Update
         i += 1
         if PROGRESS_OBJ is not None: PROGRESS_OBJ.progress(i / len(imported_module_paths))
+    # Sort unique modules
+    unique_modules = dict(sorted(unique_modules.items(), key=lambda x: x[0]))
     # Form Repo
     REPO = {
         "name": repo_name,
