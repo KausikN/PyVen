@@ -3,10 +3,11 @@
         "Version_WithCache/StreamLitGUI/UIConfig.json",
         "Version_WithCache/Procfile",
         "Version_WithCache/requirements.txt",
+        "Version_WithCache/packages.txt",
         "Version_WithCache/setup.sh"
     ],
     "special": {
-        "choiceBased": {
+        "choice_based": {
             "Cached": {
                 "label": "Cached",
                 "choices": [
@@ -26,7 +27,7 @@
                 ]   
             }
         },
-        "checkBased": {
+        "check_based": {
             "StartUICheck": {
                 "label": "Add StartUI executable?",
                 "paths": [

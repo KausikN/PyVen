@@ -92,6 +92,10 @@
             "path": "E:/Github Codes and Projects/Projects/Gattaca"
         },
         {
+            "name": "Gesturer",
+            "path": "E:/Github Codes and Projects/Projects/Gesturer"
+        },
+        {
             "name": "GigaCode",
             "path": "E:/Github Codes and Projects/Projects/GigaCode"
         },
@@ -162,6 +166,10 @@
         {
             "name": "MusicMaker",
             "path": "E:/Github Codes and Projects/Projects/MusicMaker"
+        },
+        {
+            "name": "MusicVis",
+            "path": "E:/Github Codes and Projects/Projects/MusicVis"
         },
         {
             "name": "MyGit",
@@ -265,29 +273,114 @@
         }
     ],
     "analyse_repo_current": {
-        "name": "EasyInit",
+        "name": "MusicVis",
         "repo_tree": {
-            "name": "EasyInit",
-            "repo_link": "https://github.com/KausikN/EasyInit",
-            "local_path": "E:/Github Codes and Projects/Projects/EasyInit",
+            "name": "MusicVis",
+            "repo_link": "https://github.com/KausikN/MusicVis",
+            "local_path": "E:/Github Codes and Projects/Projects/MusicVis",
             "modules": {
+                "*.py": {
+                    "name": "*",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "Libraries/AudioUtils.py": {
+                    "name": "AudioUtils",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/MusicVis/blob/master/Libraries/AudioUtils.py",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "sub_dir": "Libraries",
+                    "dependencies": [
+                        "io.py",
+                        "numpy.py",
+                        "os.py",
+                        "pretty_midi.py",
+                        "wavfile.py"
+                    ]
+                },
+                "Libraries/PianoMusicGenerator.py": {
+                    "name": "PianoMusicGenerator",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/MusicVis/blob/master/Libraries/PianoMusicGenerator.py",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "sub_dir": "Libraries",
+                    "dependencies": [
+                        "MIDIFile.py",
+                        "chords.py"
+                    ]
+                },
+                "MIDIFile.py": {
+                    "name": "MIDIFile",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "MusicVis.py": {
+                    "name": "MusicVis",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/MusicVis/blob/master/MusicVis.py",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "sub_dir": "",
+                    "dependencies": [
+                        "*.py",
+                        "PianoMusicGenerator.py"
+                    ]
+                },
+                "PianoMusicGenerator.py": {
+                    "name": "PianoMusicGenerator",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
                 "app.py": {
                     "name": "app",
                     "type": "local",
-                    "link": "https://github.com/KausikN/EasyInit/blob/master/app.py",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/EasyInit",
+                    "link": "https://github.com/KausikN/MusicVis/blob/master/app.py",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
                     "sub_dir": "",
                     "dependencies": [
+                        "*.py",
                         "json.py",
                         "os.py",
                         "streamlit.py"
                     ]
                 },
+                "chords.py": {
+                    "name": "chords",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "io.py": {
+                    "name": "io",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
                 "json.py": {
                     "name": "json",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/EasyInit",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "numpy.py": {
+                    "name": "numpy",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -295,7 +388,15 @@
                     "name": "os",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/EasyInit",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "pretty_midi.py": {
+                    "name": "pretty_midi",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -303,7 +404,15 @@
                     "name": "streamlit",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/EasyInit",
+                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "wavfile.py": {
+                    "name": "wavfile",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
                     "sub_dir": "",
                     "dependencies": []
                 }

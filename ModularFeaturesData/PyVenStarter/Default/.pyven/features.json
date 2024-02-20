@@ -3,8 +3,8 @@
         "PyVenStarter": {
             "name": "PyVenStarter",
             "special": {
-                "choiceBased": {},
-                "checkBased": {}
+                "choice_based": {},
+                "check_based": {}
             }
         }
     }
