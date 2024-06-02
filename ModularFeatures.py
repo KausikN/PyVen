@@ -2,14 +2,14 @@
 Add and remove Modular features to repositories
 
 Format of a modular feature:
- - Put a folder inside ModularFeaturesData/
- - Name: FeatureName (Eg. "StreamlitGUI")
- - Add a folder called "Version1" inside the folder and put all required files inside for that version
- - While adding a included file, its heirarchy is replicated from inside the version folder
-     - Eg. a file, "Version1/A/B/C.py will be added as A/B/C.py into the destination (Version Part will be removed)"
-     - Use this to keep different version of same file in same heirarchy which can be added based on choices
-     - Eg. Choosing between adding cv2/A/B/C.py or PIL/A/B/C.py to the same location A/B/C.py based on user choice cv2 or PIL
- - Add a file called "includes.json" inside the folder
+- Put a folder inside ModularFeaturesData/
+- Name: FeatureName (Eg. "StreamlitGUI")
+- Add a folder called "Version1" inside the folder and put all required files inside for that version
+- While adding a included file, its heirarchy is replicated from inside the version folder
+    - Eg. a file, "Version1/A/B/C.py will be added as A/B/C.py into the destination (Version Part will be removed)"
+    - Use this to keep different version of same file in same heirarchy which can be added based on choices
+    - Eg. Choosing between adding cv2/A/B/C.py or PIL/A/B/C.py to the same location A/B/C.py based on user choice cv2 or PIL
+- Add a file called "includes.json" inside the folder
     - A JSON object with the following format:
         {
             "common": [

@@ -461,6 +461,7 @@ def Repo_FindModules(repo_path, user_name="KausikN", display=False, PROGRESS_OBJ
     Repo - Find Modules
     '''
     # Init
+    repo_path = repo_path.replace("\\", "/")
     repo_name = repo_path.rstrip("/").split("/")[-1]
     # Get all python files in the repo
     CodeFiles = []

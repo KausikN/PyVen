@@ -6,5 +6,7 @@
         "ModularFeatures.py",
         "ModularFeaturesData/"
     ],
-    "streamlit": {}
+    "streamlit": {
+        "link": "https://kausikn-pyven.streamlit.app/"
+    }
 }
