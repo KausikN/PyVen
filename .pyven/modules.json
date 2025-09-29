@@ -1,7 +1,7 @@
 {
     "name": "PyVen",
     "repo_link": "https://github.com/KausikN/PyVen",
-    "local_path": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+    "local_path": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
     "modules": {
         "*.py": {
             "name": "*",
@@ -39,7 +39,7 @@
             "name": "D",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/Examples/D.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "Examples",
             "dependencies": [
                 "*.py"
@@ -49,7 +49,7 @@
             "name": "Test",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Test.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "Examples",
             "dependencies": [
                 "*.py",
@@ -72,7 +72,7 @@
             "name": "B",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/B.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "Examples/Utils",
             "dependencies": [
                 "Examples/Utils/C.py",
@@ -84,7 +84,7 @@
             "name": "C",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/C.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "Examples/Utils",
             "dependencies": []
         },
@@ -92,7 +92,7 @@
             "name": "A",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/Haha/A.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "Examples/Utils/Haha",
             "dependencies": [
                 "matplotlib/pyplot.py",
@@ -104,7 +104,7 @@
             "name": "__init__",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/__init__.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "Examples/Utils",
             "dependencies": []
         },
@@ -112,7 +112,7 @@
             "name": "ModularFeatures",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeatures.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": [
                 "json.py",
@@ -124,7 +124,7 @@
             "name": "app",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeaturesData/StreamlitGUI/Version_WithCache/app.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "ModularFeaturesData/StreamlitGUI/Version_WithCache",
             "dependencies": [
                 "json.py",
@@ -136,7 +136,7 @@
             "name": "app",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeaturesData/StreamlitGUI/Version_WithoutCache/app.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "ModularFeaturesData/StreamlitGUI/Version_WithoutCache",
             "dependencies": [
                 "json.py",
@@ -148,7 +148,7 @@
             "name": "PyVen",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/PyVen.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": [
                 "ast.py",
@@ -157,6 +157,7 @@
                 "json.py",
                 "multiprocessing.py",
                 "os.py",
+                "stqdm.py",
                 "tqdm.py"
             ]
         },
@@ -164,7 +165,7 @@
             "name": "app",
             "type": "local",
             "link": "https://github.com/KausikN/PyVen/blob/master/app.py",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": [
                 "*.py",
@@ -178,15 +179,15 @@
             "name": "ast",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
         "cv2.py": {
             "name": "cv2",
-            "type": "inbuilt",
+            "type": "missing",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "",
             "sub_dir": "",
             "dependencies": []
         },
@@ -194,7 +195,7 @@
             "name": "functools",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -202,7 +203,7 @@
             "name": "importlib",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -210,7 +211,7 @@
             "name": "json",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -226,7 +227,7 @@
             "name": "matplotlib",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -234,7 +235,7 @@
             "name": "pyplot",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "matplotlib",
             "dependencies": []
         },
@@ -242,7 +243,7 @@
             "name": "multiprocessing",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -258,7 +259,7 @@
             "name": "numpy",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -266,7 +267,7 @@
             "name": "os",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -282,7 +283,7 @@
             "name": "random",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -290,7 +291,15 @@
             "name": "shutil",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "sub_dir": "",
+            "dependencies": []
+        },
+        "stqdm.py": {
+            "name": "stqdm",
+            "type": "inbuilt",
+            "link": "",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -298,7 +307,7 @@
             "name": "streamlit",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -306,7 +315,7 @@
             "name": "sys",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -314,7 +323,7 @@
             "name": "time",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         },
@@ -322,7 +331,7 @@
             "name": "tqdm",
             "type": "inbuilt",
             "link": "",
-            "parent_dir": "E:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "sub_dir": "",
             "dependencies": []
         }

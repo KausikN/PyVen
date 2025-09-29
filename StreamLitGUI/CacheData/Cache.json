@@ -1,283 +1,287 @@
 {
     "PATHS_PARENT_GIT": [
-        "E:/Github Codes and Projects/Projects/"
+        "D:/Github Codes and Projects/Projects/"
     ],
     "GIT_REPOS": [
         {
             "name": "AIVis",
-            "path": "E:/Github Codes and Projects/Projects/AIVis"
+            "path": "D:/Github Codes and Projects/Projects/AIVis"
         },
         {
             "name": "ANNCodeGen",
-            "path": "E:/Github Codes and Projects/Projects/ANNCodeGen"
+            "path": "D:/Github Codes and Projects/Projects/ANNCodeGen"
         },
         {
             "name": "Accilert_Codes",
-            "path": "E:/Github Codes and Projects/Projects/Accilert_Codes"
+            "path": "D:/Github Codes and Projects/Projects/Accilert_Codes"
         },
         {
             "name": "ActivityFactorComputer",
-            "path": "E:/Github Codes and Projects/Projects/ActivityFactorComputer"
+            "path": "D:/Github Codes and Projects/Projects/ActivityFactorComputer"
         },
         {
             "name": "AlgoVis",
-            "path": "E:/Github Codes and Projects/Projects/AlgoVis"
+            "path": "D:/Github Codes and Projects/Projects/AlgoVis"
         },
         {
             "name": "AnimASCII",
-            "path": "E:/Github Codes and Projects/Projects/AnimASCII"
+            "path": "D:/Github Codes and Projects/Projects/AnimASCII"
         },
         {
             "name": "AutoUI",
-            "path": "E:/Github Codes and Projects/Projects/AutoUI"
+            "path": "D:/Github Codes and Projects/Projects/AutoUI"
         },
         {
             "name": "BengaliCharacterRecognition",
-            "path": "E:/Github Codes and Projects/Projects/BengaliCharacterRecognition"
+            "path": "D:/Github Codes and Projects/Projects/BengaliCharacterRecognition"
         },
         {
             "name": "BookPal",
-            "path": "E:/Github Codes and Projects/Projects/BookPal"
+            "path": "D:/Github Codes and Projects/Projects/BookPal"
         },
         {
             "name": "CaptchaGotcha",
-            "path": "E:/Github Codes and Projects/Projects/CaptchaGotcha"
+            "path": "D:/Github Codes and Projects/Projects/CaptchaGotcha"
         },
         {
             "name": "ChaosVis",
-            "path": "E:/Github Codes and Projects/Projects/ChaosVis"
+            "path": "D:/Github Codes and Projects/Projects/ChaosVis"
         },
         {
             "name": "ChessOverloaded",
-            "path": "E:/Github Codes and Projects/Projects/ChessOverloaded"
+            "path": "D:/Github Codes and Projects/Projects/ChessOverloaded"
         },
         {
             "name": "CommonHostApp",
-            "path": "E:/Github Codes and Projects/Projects/_MetaProjects\\CommonHostApp"
+            "path": "D:/Github Codes and Projects/Projects/_MetaProjects\\CommonHostApp"
         },
         {
             "name": "ConwaysGameofLife",
-            "path": "E:/Github Codes and Projects/Projects/ConwaysGameofLife"
+            "path": "D:/Github Codes and Projects/Projects/ConwaysGameofLife"
         },
         {
             "name": "DaVIS",
-            "path": "E:/Github Codes and Projects/Projects/DaVIS"
+            "path": "D:/Github Codes and Projects/Projects/DaVIS"
         },
         {
             "name": "DescripGen",
-            "path": "E:/Github Codes and Projects/Projects/DescripGen"
+            "path": "D:/Github Codes and Projects/Projects/DescripGen"
         },
         {
             "name": "DevoteeApp",
-            "path": "E:/Github Codes and Projects/Projects/DevoteeApp"
+            "path": "D:/Github Codes and Projects/Projects/DevoteeApp"
         },
         {
             "name": "DuoSecure",
-            "path": "E:/Github Codes and Projects/Projects/DuoSecure"
+            "path": "D:/Github Codes and Projects/Projects/DuoSecure"
         },
         {
             "name": "EasyInit",
-            "path": "E:/Github Codes and Projects/Projects/EasyInit"
+            "path": "D:/Github Codes and Projects/Projects/EasyInit"
         },
         {
             "name": "FastAnnotator",
-            "path": "E:/Github Codes and Projects/Projects/FastAnnotator"
+            "path": "D:/Github Codes and Projects/Projects/FastAnnotator"
         },
         {
             "name": "FilmyPy",
-            "path": "E:/Github Codes and Projects/Projects/FilmyPy"
+            "path": "D:/Github Codes and Projects/Projects/FilmyPy"
         },
         {
             "name": "Gattaca",
-            "path": "E:/Github Codes and Projects/Projects/Gattaca"
+            "path": "D:/Github Codes and Projects/Projects/Gattaca"
         },
         {
             "name": "Gesturer",
-            "path": "E:/Github Codes and Projects/Projects/Gesturer"
+            "path": "D:/Github Codes and Projects/Projects/Gesturer"
         },
         {
             "name": "GigaCode",
-            "path": "E:/Github Codes and Projects/Projects/GigaCode"
+            "path": "D:/Github Codes and Projects/Projects/GigaCode"
         },
         {
             "name": "HELP4ALL",
-            "path": "E:/Github Codes and Projects/Projects/HELP4ALL"
+            "path": "D:/Github Codes and Projects/Projects/HELP4ALL"
         },
         {
             "name": "HandwritingGen",
-            "path": "E:/Github Codes and Projects/Projects/HandwritingGen"
+            "path": "D:/Github Codes and Projects/Projects/HandwritingGen"
         },
         {
             "name": "HospiDB",
-            "path": "E:/Github Codes and Projects/Projects/HospiDB"
+            "path": "D:/Github Codes and Projects/Projects/HospiDB"
         },
         {
             "name": "HuggingPlay",
-            "path": "E:/Github Codes and Projects/Projects/HuggingPlay"
+            "path": "D:/Github Codes and Projects/Projects/HuggingPlay"
         },
         {
             "name": "ImTron",
-            "path": "E:/Github Codes and Projects/Projects/ImTron"
+            "path": "D:/Github Codes and Projects/Projects/ImTron"
         },
         {
             "name": "ImageColoriser",
-            "path": "E:/Github Codes and Projects/Projects/ImageColoriser"
+            "path": "D:/Github Codes and Projects/Projects/ImageColoriser"
         },
         {
             "name": "ImageSegmentation",
-            "path": "E:/Github Codes and Projects/Projects/ImageSegmentation"
+            "path": "D:/Github Codes and Projects/Projects/ImageSegmentation"
         },
         {
             "name": "ImportantDocuments",
-            "path": "E:/Github Codes and Projects/Projects/ImportantDocuments"
+            "path": "D:/Github Codes and Projects/Projects/ImportantDocuments"
         },
         {
             "name": "InfinityJoker",
-            "path": "E:/Github Codes and Projects/Projects/InfinityJoker"
+            "path": "D:/Github Codes and Projects/Projects/InfinityJoker"
         },
         {
             "name": "LANFileTransfer",
-            "path": "E:/Github Codes and Projects/Projects/LANFileTransfer"
+            "path": "D:/Github Codes and Projects/Projects/LANFileTransfer"
         },
         {
             "name": "MazeRunner",
-            "path": "E:/Github Codes and Projects/Projects/MazeRunner"
+            "path": "D:/Github Codes and Projects/Projects/MazeRunner"
         },
         {
             "name": "MediaOrganiser",
-            "path": "E:/Github Codes and Projects/Projects/MediaOrganiser"
+            "path": "D:/Github Codes and Projects/Projects/MediaOrganiser"
         },
         {
             "name": "MediaTor",
-            "path": "E:/Github Codes and Projects/Projects/MediaTor"
+            "path": "D:/Github Codes and Projects/Projects/MediaTor"
         },
         {
             "name": "MemeCompress",
-            "path": "E:/Github Codes and Projects/Projects/MemeCompress"
+            "path": "D:/Github Codes and Projects/Projects/MemeCompress"
         },
         {
             "name": "MemoryBasedComputation",
-            "path": "E:/Github Codes and Projects/Projects/MemoryBasedComputation"
+            "path": "D:/Github Codes and Projects/Projects/MemoryBasedComputation"
         },
         {
             "name": "Mozhi",
-            "path": "E:/Github Codes and Projects/Projects/Mozhi"
+            "path": "D:/Github Codes and Projects/Projects/Mozhi"
         },
         {
             "name": "MusicMaker",
-            "path": "E:/Github Codes and Projects/Projects/MusicMaker"
+            "path": "D:/Github Codes and Projects/Projects/MusicMaker"
         },
         {
             "name": "MusicVis",
-            "path": "E:/Github Codes and Projects/Projects/MusicVis"
+            "path": "D:/Github Codes and Projects/Projects/MusicVis"
         },
         {
             "name": "MyGit",
-            "path": "E:/Github Codes and Projects/Projects/MyGit"
+            "path": "D:/Github Codes and Projects/Projects/MyGit"
         },
         {
             "name": "NeuralNetworkNuke",
-            "path": "E:/Github Codes and Projects/Projects/NeuralNetworkNuke"
+            "path": "D:/Github Codes and Projects/Projects/NeuralNetworkNuke"
         },
         {
             "name": "NitroTurtle",
-            "path": "E:/Github Codes and Projects/Projects/NitroTurtle"
+            "path": "D:/Github Codes and Projects/Projects/NitroTurtle"
         },
         {
             "name": "Nucleus",
-            "path": "E:/Github Codes and Projects/Projects/Nucleus"
+            "path": "D:/Github Codes and Projects/Projects/Nucleus"
         },
         {
             "name": "PandemicForecasting",
-            "path": "E:/Github Codes and Projects/Projects/PandemicForecasting"
+            "path": "D:/Github Codes and Projects/Projects/PandemicForecasting"
         },
         {
             "name": "PixelBreak",
-            "path": "E:/Github Codes and Projects/Projects/PixelBreak"
+            "path": "D:/Github Codes and Projects/Projects/PixelBreak"
         },
         {
             "name": "ProcLab",
-            "path": "E:/Github Codes and Projects/Projects/ProcLab"
+            "path": "D:/Github Codes and Projects/Projects/ProcLab"
         },
         {
             "name": "PyGames",
-            "path": "E:/Github Codes and Projects/Projects/PyGames"
+            "path": "D:/Github Codes and Projects/Projects/PyGames"
         },
         {
             "name": "PyThread",
-            "path": "E:/Github Codes and Projects/Projects/PyThread"
+            "path": "D:/Github Codes and Projects/Projects/PyThread"
         },
         {
             "name": "PyVen",
-            "path": "E:/Github Codes and Projects/Projects/_MetaProjects\\PyVen"
+            "path": "D:/Github Codes and Projects/Projects/_MetaProjects\\PyVen"
         },
         {
             "name": "QRCode",
-            "path": "E:/Github Codes and Projects/Projects/QRCode"
+            "path": "D:/Github Codes and Projects/Projects/QRCode"
         },
         {
             "name": "RLDev",
-            "path": "E:/Github Codes and Projects/Projects/RLDev"
+            "path": "D:/Github Codes and Projects/Projects/RLDev"
         },
         {
             "name": "RPA",
-            "path": "E:/Github Codes and Projects/Projects/RPA"
+            "path": "D:/Github Codes and Projects/Projects/RPA"
         },
         {
             "name": "RandomIdeaOrganiser",
-            "path": "E:/Github Codes and Projects/Projects/RandomIdeaOrganiser"
+            "path": "D:/Github Codes and Projects/Projects/RandomIdeaOrganiser"
         },
         {
             "name": "SkelAnim",
-            "path": "E:/Github Codes and Projects/Projects/SkelAnim"
+            "path": "D:/Github Codes and Projects/Projects/SkelAnim"
         },
         {
             "name": "SpacePlayground",
-            "path": "E:/Github Codes and Projects/Projects/SpacePlayground"
+            "path": "D:/Github Codes and Projects/Projects/SpacePlayground"
         },
         {
             "name": "SpeechSynth",
-            "path": "E:/Github Codes and Projects/Projects/SpeechSynth"
+            "path": "D:/Github Codes and Projects/Projects/SpeechSynth"
         },
         {
             "name": "StockVis",
-            "path": "E:/Github Codes and Projects/Projects/StockVis"
+            "path": "D:/Github Codes and Projects/Projects/StockVis"
         },
         {
             "name": "TerminalMusic",
-            "path": "E:/Github Codes and Projects/Projects/TerminalMusic"
+            "path": "D:/Github Codes and Projects/Projects/TerminalMusic"
         },
         {
             "name": "TerrainGen",
-            "path": "E:/Github Codes and Projects/Projects/TerrainGen"
+            "path": "D:/Github Codes and Projects/Projects/TerrainGen"
         },
         {
             "name": "TomosuloAlgorithm",
-            "path": "E:/Github Codes and Projects/Projects/TomosuloAlgorithm"
+            "path": "D:/Github Codes and Projects/Projects/TomosuloAlgorithm"
         },
         {
             "name": "UrsinaDev",
-            "path": "E:/Github Codes and Projects/Projects/UrsinaDev"
+            "path": "D:/Github Codes and Projects/Projects/UrsinaDev"
+        },
+        {
+            "name": "VedicAstro",
+            "path": "D:/Github Codes and Projects/Projects/VedicAstro"
         },
         {
             "name": "VerilogTestBenchGenerator",
-            "path": "E:/Github Codes and Projects/Projects/VerilogTestBenchGenerator"
+            "path": "D:/Github Codes and Projects/Projects/VerilogTestBenchGenerator"
         },
         {
             "name": "VidFX",
-            "path": "E:/Github Codes and Projects/Projects/VidFX"
+            "path": "D:/Github Codes and Projects/Projects/VidFX"
         },
         {
             "name": "WebSlither",
-            "path": "E:/Github Codes and Projects/Projects/WebSlither"
+            "path": "D:/Github Codes and Projects/Projects/WebSlither"
         }
     ],
     "analyse_repo_current": {
-        "name": "MusicVis",
+        "name": "PyVen",
         "repo_tree": {
-            "name": "MusicVis",
-            "repo_link": "https://github.com/KausikN/MusicVis",
-            "local_path": "E:/Github Codes and Projects/Projects/MusicVis",
+            "name": "PyVen",
+            "repo_link": "https://github.com/KausikN/PyVen",
+            "local_path": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
             "modules": {
                 "*.py": {
                     "name": "*",
@@ -287,84 +291,199 @@
                     "sub_dir": "",
                     "dependencies": []
                 },
-                "Libraries/AudioUtils.py": {
-                    "name": "AudioUtils",
+                "A.py": {
+                    "name": "A",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "B.py": {
+                    "name": "B",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "C.py": {
+                    "name": "C",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "Examples/D.py": {
+                    "name": "D",
                     "type": "local",
-                    "link": "https://github.com/KausikN/MusicVis/blob/master/Libraries/AudioUtils.py",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
-                    "sub_dir": "Libraries",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/D.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "Examples",
                     "dependencies": [
-                        "io.py",
+                        "*.py"
+                    ]
+                },
+                "Examples/Test.py": {
+                    "name": "Test",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Test.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "Examples",
+                    "dependencies": [
+                        "*.py",
+                        "A.py",
+                        "B.py",
+                        "C.py",
+                        "Examples/D.py",
+                        "lognorm.py",
+                        "matplotlib/pyplot.py",
+                        "norm.py",
                         "numpy.py",
                         "os.py",
-                        "pretty_midi.py",
-                        "wavfile.py"
+                        "pygame.py",
+                        "random.py",
+                        "sys.py",
+                        "time.py"
                     ]
                 },
-                "Libraries/PianoMusicGenerator.py": {
-                    "name": "PianoMusicGenerator",
+                "Examples/Utils/B.py": {
+                    "name": "B",
                     "type": "local",
-                    "link": "https://github.com/KausikN/MusicVis/blob/master/Libraries/PianoMusicGenerator.py",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
-                    "sub_dir": "Libraries",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/B.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "Examples/Utils",
                     "dependencies": [
-                        "MIDIFile.py",
-                        "chords.py"
+                        "Examples/Utils/C.py",
+                        "cv2.py",
+                        "matplotlib.py"
                     ]
                 },
-                "MIDIFile.py": {
-                    "name": "MIDIFile",
-                    "type": "missing",
-                    "link": "",
-                    "parent_dir": "",
-                    "sub_dir": "",
+                "Examples/Utils/C.py": {
+                    "name": "C",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/C.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "Examples/Utils",
                     "dependencies": []
                 },
-                "MusicVis.py": {
-                    "name": "MusicVis",
+                "Examples/Utils/Haha/A.py": {
+                    "name": "A",
                     "type": "local",
-                    "link": "https://github.com/KausikN/MusicVis/blob/master/MusicVis.py",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
-                    "sub_dir": "",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/Haha/A.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "Examples/Utils/Haha",
                     "dependencies": [
-                        "*.py",
-                        "PianoMusicGenerator.py"
+                        "matplotlib/pyplot.py",
+                        "numpy.py",
+                        "os.py"
                     ]
                 },
-                "PianoMusicGenerator.py": {
-                    "name": "PianoMusicGenerator",
-                    "type": "missing",
-                    "link": "",
-                    "parent_dir": "",
-                    "sub_dir": "",
+                "Examples/Utils/__init__.py": {
+                    "name": "__init__",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/__init__.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "Examples/Utils",
                     "dependencies": []
                 },
-                "app.py": {
+                "ModularFeatures.py": {
+                    "name": "ModularFeatures",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeatures.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": [
+                        "json.py",
+                        "os.py",
+                        "shutil.py"
+                    ]
+                },
+                "ModularFeaturesData/StreamlitGUI/Version_WithCache/app.py": {
                     "name": "app",
                     "type": "local",
-                    "link": "https://github.com/KausikN/MusicVis/blob/master/app.py",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
-                    "sub_dir": "",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeaturesData/StreamlitGUI/Version_WithCache/app.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "ModularFeaturesData/StreamlitGUI/Version_WithCache",
                     "dependencies": [
-                        "*.py",
                         "json.py",
                         "os.py",
                         "streamlit.py"
                     ]
                 },
-                "chords.py": {
-                    "name": "chords",
+                "ModularFeaturesData/StreamlitGUI/Version_WithoutCache/app.py": {
+                    "name": "app",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeaturesData/StreamlitGUI/Version_WithoutCache/app.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "ModularFeaturesData/StreamlitGUI/Version_WithoutCache",
+                    "dependencies": [
+                        "json.py",
+                        "os.py",
+                        "streamlit.py"
+                    ]
+                },
+                "PyVen.py": {
+                    "name": "PyVen",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/PyVen.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": [
+                        "ast.py",
+                        "functools.py",
+                        "importlib.py",
+                        "json.py",
+                        "multiprocessing.py",
+                        "os.py",
+                        "stqdm.py",
+                        "tqdm.py"
+                    ]
+                },
+                "app.py": {
+                    "name": "app",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/PyVen/blob/master/app.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": [
+                        "*.py",
+                        "PyVen.py",
+                        "json.py",
+                        "os.py",
+                        "streamlit.py"
+                    ]
+                },
+                "ast.py": {
+                    "name": "ast",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "cv2.py": {
+                    "name": "cv2",
                     "type": "missing",
                     "link": "",
                     "parent_dir": "",
                     "sub_dir": "",
                     "dependencies": []
                 },
-                "io.py": {
-                    "name": "io",
+                "functools.py": {
+                    "name": "functools",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "importlib.py": {
+                    "name": "importlib",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -372,7 +491,47 @@
                     "name": "json",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "lognorm.py": {
+                    "name": "lognorm",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "matplotlib.py": {
+                    "name": "matplotlib",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "matplotlib/pyplot.py": {
+                    "name": "pyplot",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "matplotlib",
+                    "dependencies": []
+                },
+                "multiprocessing.py": {
+                    "name": "multiprocessing",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "norm.py": {
+                    "name": "norm",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -380,7 +539,7 @@
                     "name": "numpy",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -388,15 +547,39 @@
                     "name": "os",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
                     "sub_dir": "",
                     "dependencies": []
                 },
-                "pretty_midi.py": {
-                    "name": "pretty_midi",
+                "pygame.py": {
+                    "name": "pygame",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "random.py": {
+                    "name": "random",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "shutil.py": {
+                    "name": "shutil",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "stqdm.py": {
+                    "name": "stqdm",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -404,15 +587,31 @@
                     "name": "streamlit",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "E:/Github Codes and Projects/Projects/MusicVis",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
                     "sub_dir": "",
                     "dependencies": []
                 },
-                "wavfile.py": {
-                    "name": "wavfile",
-                    "type": "missing",
+                "sys.py": {
+                    "name": "sys",
+                    "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "time.py": {
+                    "name": "time",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "tqdm.py": {
+                    "name": "tqdm",
+                    "type": "inbuilt",
+                    "link": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
                     "sub_dir": "",
                     "dependencies": []
                 }

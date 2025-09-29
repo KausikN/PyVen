@@ -2,6 +2,7 @@
     "repo_name": "PyVen",
     "requirements": [
         "streamlit",
-        "tqdm"
+        "tqdm",
+        "stqdm"
     ]
 }

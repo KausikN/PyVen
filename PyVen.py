@@ -10,6 +10,7 @@ import functools
 import ast
 import multiprocessing
 from tqdm import tqdm
+from stqdm import stqdm
 
 # Main Functions
 # Module Functions
@@ -456,7 +457,7 @@ def DependencyTree_Compressed_Python(code_path, level=0, display=False):
 ##########################################################################################################################
 
 ### REPO LEVEL PYVEN #####################################################################################################
-def Repo_FindModules(repo_path, user_name="KausikN", display=False, PROGRESS_OBJ=None):
+def Repo_FindModules(repo_path, user_name="KausikN", display=False, PROGRESS_OBJ=None, use_sqtdm=False):
     '''
     Repo - Find Modules
     '''
@@ -508,7 +509,8 @@ def Repo_FindModules(repo_path, user_name="KausikN", display=False, PROGRESS_OBJ
     # Check if all imported modules are local or else mark as inbuilt
     imported_module_paths = list(set(imported_module_paths)) # Remove Duplicates
     i = 0
-    for path in tqdm(imported_module_paths):
+    tqdm_func = tqdm if not use_sqtdm else stqdm
+    for path in tqdm_func(imported_module_paths):
         ## Check if module is inbuilt
         if path not in unique_modules.keys():
             sub_dir = os.path.split(path)[0].replace("\\", "/").strip("/")

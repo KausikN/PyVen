@@ -96,7 +96,7 @@ def RebuildModules(REPO_PATH, PROGRESS_OBJ=None):
     '''
     Rebuild Modules
     '''
-    MODULES = PyVen.Repo_FindModules(REPO_PATH, PROGRESS_OBJ=PROGRESS_OBJ)
+    MODULES = PyVen.Repo_FindModules(REPO_PATH, PROGRESS_OBJ=PROGRESS_OBJ, use_sqtdm=(PROGRESS_OBJ is None))
     SavePyVenModulesMetadata(REPO_PATH, MODULES)
     return MODULES
 
@@ -147,13 +147,24 @@ def UI_LoadRepos(parent_paths):
 
     return REPO_DATAS
 
+def UI_SelectRepo(REPO_DATAS):
+    '''
+    UI - Select Repo
+    '''
+    REPO_NAMES = [repo["name"] for repo in REPO_DATAS]
+    USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES)
+    if USERINPUT_RepoChoiceName == "Select Repo": return
+    USERINPUT_RepoChoice = REPO_DATAS[REPO_NAMES.index(USERINPUT_RepoChoiceName)]
+
+    return USERINPUT_RepoChoice
+
 def UI_DisplayRepoTreeData(repo):
     '''
     UI - Display Repo Tree Data
     '''
     # Display Repo Details
     st.markdown("## " + repo["name"])
-    st.markdown("<a href=" + repo["repo_link"] + ">" + repo["repo_link"] + "</a>", unsafe_allow_html=True)
+    st.link_button("Open Repo Link", repo["repo_link"])
     st.markdown(repo["local_path"])
     # Display Modules
     modules_keys = list(repo["modules"].keys())
@@ -173,11 +184,24 @@ def UI_DisplayRepoTreeData(repo):
     if USEINPUT_Module["type"] == "local":
         col1, col2 = st.columns(detail_size_ratio)
         col1.markdown("File Link:")
-        col2.markdown("<a href=" + USEINPUT_Module["link"] + ">" + USEINPUT_Module["link"] + "</a>", unsafe_allow_html=True)
+        col2.markdown(USEINPUT_Module["link"])
         col1, col2 = st.columns(detail_size_ratio)
         col1.markdown("Dependencies:")
         deps = [repo["modules"][key]["name"] for key in USEINPUT_Module["dependencies"]]
         col2.markdown(", ".join(deps))
+
+def UI_DisplayAddedFeaturesData(REPO_PATH):
+    '''
+    UI - Display Added Features Data
+    '''
+    st.markdown("## Features Added")
+    ADDED_FEATURES = ModularFeature_Check(REPO_PATH)
+    if ADDED_FEATURES is None:
+        st.warning("Repo not initialsed with PyVen.")
+    else:
+        st.multiselect("Added Features", ADDED_FEATURES, default=ADDED_FEATURES, disabled=True)
+
+    return ADDED_FEATURES
 
 def UI_GetFeatureParams(feature_path, defaults=None, NCOLS=3):
     '''
@@ -244,7 +268,7 @@ def UI_CheckPyVenInit(REPO_PATH, REPO_NAME):
             return False
     return True
 
-def UI_SearchModePrune(REPO_DATAS, REPO_NAMES):
+def UI_SearchModePrune(REPO_DATAS):
     '''
     UI - Search Mode Prune
     '''
@@ -252,11 +276,11 @@ def UI_SearchModePrune(REPO_DATAS, REPO_NAMES):
     # Search Mode
     USERINPUT_SearchMode = st.selectbox("Search Mode", ["Search by Repo Name", "Search by Added Features"])
     if USERINPUT_SearchMode == "Search by Repo Name":
-        return REPO_DATAS, REPO_NAMES
+        return REPO_DATAS
     elif USERINPUT_SearchMode == "Search by Added Features":
         USERINPUT_RequiredFeatures = st.multiselect("Features", list(FEATURES.keys()))
-        if len(USERINPUT_RequiredFeatures) == 0: return REPO_DATAS, REPO_NAMES
-        REPO_DATAS_PRUNED, REPO_NAMES_PRUNED = [], []
+        if len(USERINPUT_RequiredFeatures) == 0: return REPO_DATAS
+        REPO_DATAS_PRUNED = []
         for repo in REPO_DATAS:
             repo_path = repo["path"]
             if PYVEN_CONFIG["pyven_dir"] not in os.listdir(repo_path): # Repo not initialised with pyven
@@ -265,8 +289,21 @@ def UI_SearchModePrune(REPO_DATAS, REPO_NAMES):
             features_names = list(features_data["added_features"].keys())
             if(set(USERINPUT_RequiredFeatures).issubset(set(features_names))):
                 REPO_DATAS_PRUNED.append(repo)
-                REPO_NAMES_PRUNED.append(repo["name"])
-        return REPO_DATAS_PRUNED, REPO_NAMES_PRUNED
+        return REPO_DATAS_PRUNED
+
+# Sidebar Functions
+def sidebar_rebuild_pyven_data(REPO_DATA):
+    REPO_PATH = REPO_DATA["path"]
+    REPO_NAME = REPO_DATA["name"]
+
+    USERINPUT_RebuildPyVenData = st.sidebar.button("Rebuild PyVen Data")
+
+    if USERINPUT_RebuildPyVenData:
+        REPO_TREE = RebuildModules(REPO_PATH, PROGRESS_OBJ=st.sidebar.progress(0.0))
+        UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
+        st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
+
+    return USERINPUT_RebuildPyVenData
 
 # Repo Based Functions
 def analyse_repo():
@@ -276,47 +313,36 @@ def analyse_repo():
     # Title
     st.header("Analyse Local Repo")
 
+    # Load Cache and Preprocessing
     LoadCache()
     LoadFeatures()
-    REPO_NAMES = [repo["name"] for repo in CACHE["GIT_REPOS"]]
     REPO_DATAS = CACHE["GIT_REPOS"]
 
     # Load Inputs
-    USERINPUT_RebuildPyVenData = st.sidebar.button("Rebuild PyVen Data")
-
-    REPO_DATAS_PRUNED, REPO_NAMES_PRUNED = UI_SearchModePrune(REPO_DATAS, REPO_NAMES)
-
-    USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES_PRUNED)
-    if USERINPUT_RepoChoiceName == "Select Repo": return
-    USERINPUT_RepoChoice = REPO_DATAS_PRUNED[REPO_NAMES_PRUNED.index(USERINPUT_RepoChoiceName)]
-
-    # Process Inputs
-    # Load Repo
+    REPO_DATAS_PRUNED = UI_SearchModePrune(REPO_DATAS)
+    USERINPUT_RepoChoice = UI_SelectRepo(REPO_DATAS_PRUNED)
     REPO_PATH = USERINPUT_RepoChoice["path"]
     REPO_NAME = USERINPUT_RepoChoice["name"]
 
-    if USERINPUT_RebuildPyVenData:
-        REPO_TREE = RebuildModules(REPO_PATH, PROGRESS_OBJ=st.sidebar.progress(0.0))
-        UpdateRepoBasicDetails(REPO_PATH, REPO_NAME)
-        st.sidebar.markdown("Rebuilt PyVen Data for " + REPO_NAME + "!")
-    elif not (REPO_NAME == CACHE["analyse_repo_current"]["name"]):
-        REPO_TREE = PyVen.Repo_FindModules(REPO_PATH, PROGRESS_OBJ=st.progress(0.0))
+    # Sidebar Functions
+    USERINPUT_SidebarExecuted = sidebar_rebuild_pyven_data(USERINPUT_RepoChoice)
+    if USERINPUT_SidebarExecuted: st.rerun()
+
+    # Process Inputs
+    # Load Repo
+    if not (REPO_NAME == CACHE["analyse_repo_current"]["name"]):
+        REPO_TREE = PyVen.Repo_FindModules(REPO_PATH, use_sqtdm=True)
     else:
         REPO_TREE = CACHE["analyse_repo_current"]["repo_tree"]
 
     # Display Outputs
+    ## Display Detected Modules
     UI_DisplayRepoTreeData(REPO_TREE)
+    ## Check if PyVen Features Added and Display Added Features
+    UI_DisplayAddedFeaturesData(REPO_PATH)
 
-    # Check if PyVen Features Added
-    st.markdown("## Features Added")
-    ADDED_FEATURES = ModularFeature_Check(REPO_PATH)
-    if ADDED_FEATURES is None:
-        st.warning("Repo not initialsed with PyVen.")
-    else:
-        USERINPUT_AddedFeaturesChoice = st.selectbox("Added Features", ADDED_FEATURES)
-
-    # Save Cache
-    if not (REPO_NAME == CACHE["analyse_repo_current"]):
+    # Save Cache and Postprocessing
+    if not (REPO_NAME == CACHE["analyse_repo_current"]["name"]):
         CACHE["analyse_repo_current"]["name"] = REPO_NAME
         CACHE["analyse_repo_current"]["repo_tree"] = REPO_TREE
         SaveCache()
@@ -327,15 +353,13 @@ def edit_repo_features():
     # Title
     st.header("Edit Repo Features")
 
+    # Load Cache and Preprocessing
     LoadCache()
     LoadFeatures()
-    REPO_NAMES = [repo["name"] for repo in CACHE["GIT_REPOS"]]
     REPO_DATAS = CACHE["GIT_REPOS"]
+    REPO_NAMES = [repo["name"] for repo in REPO_DATAS]
 
     # Load Inputs
-    USERINPUT_SafeUpdate = st.sidebar.checkbox("Safe Update/Remove", True)
-    USERINPUT_RebuildPyVenData = st.sidebar.button("Rebuild PyVen Data")
-
     USERINPUT_RepoChoiceName = st.selectbox("Select Repo", ["Select Repo"] + REPO_NAMES)
     if USERINPUT_RepoChoiceName == "Select Repo": return
     USERINPUT_RepoChoice = REPO_DATAS[REPO_NAMES.index(USERINPUT_RepoChoiceName)]
@@ -344,6 +368,11 @@ def edit_repo_features():
 
     # Check if PyVen Initialised in repo
     if not UI_CheckPyVenInit(REPO_PATH, REPO_NAME): return
+
+    # Sidebar Functions
+    USERINPUT_SafeUpdate = st.sidebar.checkbox("Safe Update/Remove", True)
+    USERINPUT_SidebarExecuted = sidebar_rebuild_pyven_data(USERINPUT_RepoChoice)
+    if USERINPUT_SidebarExecuted: st.rerun()
 
     USERINPUT_FeatureChoiceName = st.selectbox("Select Feature", ["Select Feature"] + list(FEATURES.keys()), index=1)
     if USERINPUT_FeatureChoiceName == "Select Feature": return
@@ -365,6 +394,7 @@ def edit_repo_features():
     special_inputs = UI_GetFeatureParams(USERINPUT_FeatureChoice, special_inputs_default)
 
     # Process Inputs
+    USERINPUT_RebuildPyVenData = False
     col1, col2 = st.columns(2)
     bcol1 = col1.empty()
     bcol2 = col2.empty()
@@ -374,8 +404,7 @@ def edit_repo_features():
             ModularFeature_Remove(USERINPUT_FeatureChoice, REPO_PATH, LoaderWidget, USERINPUT_SafeUpdate)
         ModularFeature_Add(USERINPUT_FeatureChoice, REPO_PATH, special_inputs, LoaderWidget, USERINPUT_SafeUpdate)
         LoaderWidget.markdown("Feature Added!")
-
-        # Save PyVen Metadata for the repo after adding the feature
+        ## Save PyVen Metadata for the repo after adding the feature
         FEATURES_DATA = LoadPyVenFeaturesMetadata(REPO_PATH)
         FEATURES_DATA["added_features"][USERINPUT_FeatureChoiceName] = {
             "name": USERINPUT_FeatureChoiceName,
@@ -391,8 +420,7 @@ def edit_repo_features():
         if bcol2.button("Remove Feature"):
             LoaderWidget = st.empty()
             ModularFeature_Remove(USERINPUT_FeatureChoice, REPO_PATH, LoaderWidget, USERINPUT_SafeUpdate)
-
-            # Save PyVen Metadata for the repo after removing the feature
+            ## Save PyVen Metadata for the repo after removing the feature
             FEATURES_DATA = LoadPyVenFeaturesMetadata(REPO_PATH)
             FEATURES_DATA["added_features"].pop(USERINPUT_FeatureChoiceName)
             SavePyVenFeaturesMetadata(REPO_PATH, FEATURES_DATA)
@@ -413,6 +441,7 @@ def settings():
     # Title
     st.header("Settings")
 
+    # Load Cache and Preprocessing
     LoadCache()
 
     # Load Inputs
@@ -422,7 +451,7 @@ def settings():
     # Process Inputs
     USERINPUT_GitRepoPaths = USERINPUT_GitRepoPathsText.split("\n")
 
-    # Display Outputs
+    # Save Cache and Postprocessing
     if st.button("Save"):
         CACHE["PATHS_PARENT_GIT"] = USERINPUT_GitRepoPaths
         CACHE["GIT_REPOS"] = UI_LoadRepos(CACHE["PATHS_PARENT_GIT"])
