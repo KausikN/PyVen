@@ -1,4 +1,6 @@
 {
     "files_to_download": [],
-    "streamlit": {}
+    "streamlit": {
+        "link": ""
+    }
 }

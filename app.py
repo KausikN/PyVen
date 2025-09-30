@@ -220,9 +220,9 @@ def UI_GetFeatureParams(feature_path, defaults=None, NCOLS=3):
         cols = st.columns(params_todo)
         for i in range(params_todo):
             choice_data_key = choice_based_data_labels[params_done + i]
-            # choice_names = [choice_based_data[choice_data_key]["choices"][k] for k in choice_based_data[choice_data_key]["choices"].keys()]
             choice_names = [k["name"] for k in choice_based_data[choice_data_key]["choices"]]
-            default_val = 0 if defaults is None else defaults["choice_based"][choice_data_key]
+            if ((defaults is None) or (choice_data_key not in defaults["choice_based"])): default_val = 0
+            else: default_val = defaults["choice_based"][choice_data_key]
             inp = cols[i].selectbox(choice_based_data[choice_data_key]["label"], choice_names, index=default_val)
             inp_index = choice_names.index(inp)
             special_inputs["choice_based"][choice_data_key] = inp_index
@@ -237,7 +237,8 @@ def UI_GetFeatureParams(feature_path, defaults=None, NCOLS=3):
         cols = st.columns(params_todo)
         for i in range(params_todo):
             check_data_key = check_based_data_labels[params_done + i]
-            default_val = False if defaults is None else defaults["check_based"][check_data_key]
+            if ((defaults is None) or (check_data_key not in defaults["check_based"])): default_val = False
+            else: default_val = defaults["check_based"][check_data_key]
             inp = st.checkbox(check_based_data[check_data_key]["label"], default_val)
             special_inputs["check_based"][check_data_key] = inp
         params_done += params_todo
@@ -390,7 +391,7 @@ def edit_repo_features():
         st.markdown("Feature " + USERINPUT_FeatureChoiceName + " already added in " + REPO_NAME + ".")
         button_name = "Update"
         feature_exists = True
-        # special_inputs_default = added_features_data[USERINPUT_FeatureChoiceName]["special"] # Commented as this messes up the UI
+        special_inputs_default = added_features_data[USERINPUT_FeatureChoiceName]["special"] # Commented as this messes up the UI
 
     special_inputs = UI_GetFeatureParams(USERINPUT_FeatureChoice, special_inputs_default)
 

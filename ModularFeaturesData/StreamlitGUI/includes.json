@@ -1,10 +1,8 @@
 {
     "common": [
         "Version_WithCache/StreamLitGUI/UIConfig.json",
-        "Version_WithCache/Procfile",
         "Version_WithCache/requirements.txt",
-        "Version_WithCache/packages.txt",
-        "Version_WithCache/setup.sh"
+        "Version_WithCache/packages.txt"
     ],
     "special": {
         "choice_based": {
@@ -34,10 +32,10 @@
                     "Version_WithCache/run.sh"
                 ]
             },
-            "GenReqCheck": {
+            "GenReqExecutable": {
                 "label": "Add Generate Requirements executable?",
                 "paths": [
-                    "Version_WithCache/RequirementGen.sh"
+                    "Version_WithCache/genreq.sh"
                 ]
             }
         }
