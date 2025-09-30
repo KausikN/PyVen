@@ -28,10 +28,10 @@
             }
         },
         "check_based": {
-            "StartUICheck": {
-                "label": "Add StartUI executable?",
+            "RunExecutable": {
+                "label": "Add run executable?",
                 "paths": [
-                    "Version_WithCache/StartUI.sh"
+                    "Version_WithCache/run.sh"
                 ]
             },
             "GenReqCheck": {

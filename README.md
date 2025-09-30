@@ -6,7 +6,7 @@
 
 - GUI built using streamlit
 - To use app locally,
-    - Clone the repo and run [StartUI.sh](StartUI.sh) to view the app on your browser!
+    - Clone the repo and run [run.sh](run.sh) to view the app on your browser!
 - App is hosted at [Streamlit](https://kausikn-pyven.streamlit.app/)
 - App can also be run on my [Common Host App](https://kausikn-commonhostapp.streamlit.app/),
     - Choose settings from the left tab dropdown and select "Add New Repo" under Select Setting dropdown

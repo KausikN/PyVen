@@ -14,7 +14,7 @@
                     "Cached": 0
                 },
                 "check_based": {
-                    "StartUICheck": true
+                    "RunExecutable": true
                 }
             }
         }
