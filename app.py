@@ -321,6 +321,7 @@ def analyse_repo():
     # Load Inputs
     REPO_DATAS_PRUNED = UI_SearchModePrune(REPO_DATAS)
     USERINPUT_RepoChoice = UI_SelectRepo(REPO_DATAS_PRUNED)
+    if USERINPUT_RepoChoice is None: return
     REPO_PATH = USERINPUT_RepoChoice["path"]
     REPO_NAME = USERINPUT_RepoChoice["name"]
 
