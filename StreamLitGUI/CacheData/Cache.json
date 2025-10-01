@@ -277,11 +277,11 @@
         }
     ],
     "analyse_repo_current": {
-        "name": "PyVen",
+        "name": "AnimASCII",
         "repo_tree": {
-            "name": "PyVen",
-            "repo_link": "https://github.com/KausikN/PyVen",
-            "local_path": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+            "name": "AnimASCII",
+            "repo_link": "https://github.com/KausikN/AnimASCII",
+            "local_path": "D:/Github Codes and Projects/Projects/AnimASCII",
             "modules": {
                 "*.py": {
                     "name": "*",
@@ -291,183 +291,159 @@
                     "sub_dir": "",
                     "dependencies": []
                 },
-                "A.py": {
-                    "name": "A",
-                    "type": "missing",
-                    "link": "",
-                    "parent_dir": "",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "B.py": {
-                    "name": "B",
-                    "type": "missing",
-                    "link": "",
-                    "parent_dir": "",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "C.py": {
-                    "name": "C",
-                    "type": "missing",
-                    "link": "",
-                    "parent_dir": "",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "Examples/D.py": {
-                    "name": "D",
+                "AnimASCII.py": {
+                    "name": "AnimASCII",
                     "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/D.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "Examples",
+                    "link": "https://github.com/KausikN/AnimASCII/blob/master/AnimASCII.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
+                    "sub_dir": "",
                     "dependencies": [
+                        "GeneratorLibrary.py",
+                        "PaddingLibrary.py",
+                        "art.py",
+                        "functools.py",
+                        "json.py"
+                    ]
+                },
+                "Data/FontsData/text_dic1.py": {
+                    "name": "text_dic1",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/AnimASCII/blob/master/Data/FontsData/text_dic1.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
+                    "sub_dir": "Data/FontsData",
+                    "dependencies": []
+                },
+                "Data/FontsData/text_dic2.py": {
+                    "name": "text_dic2",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/AnimASCII/blob/master/Data/FontsData/text_dic2.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
+                    "sub_dir": "Data/FontsData",
+                    "dependencies": []
+                },
+                "Data/FontsData/text_dic3.py": {
+                    "name": "text_dic3",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/AnimASCII/blob/master/Data/FontsData/text_dic3.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
+                    "sub_dir": "Data/FontsData",
+                    "dependencies": []
+                },
+                "Fonts.py": {
+                    "name": "Fonts",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/AnimASCII/blob/master/Fonts.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
+                    "sub_dir": "",
+                    "dependencies": [
+                        "*.py",
+                        "*.py",
                         "*.py"
                     ]
                 },
-                "Examples/Test.py": {
-                    "name": "Test",
+                "GeneratorLibrary.py": {
+                    "name": "GeneratorLibrary",
                     "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Test.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "Examples",
+                    "link": "https://github.com/KausikN/AnimASCII/blob/master/GeneratorLibrary.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
+                    "sub_dir": "",
                     "dependencies": [
-                        "*.py",
-                        "A.py",
-                        "B.py",
-                        "C.py",
-                        "Examples/D.py",
-                        "lognorm.py",
-                        "matplotlib/pyplot.py",
-                        "norm.py",
-                        "numpy.py",
-                        "os.py",
-                        "pygame.py",
-                        "random.py",
-                        "sys.py",
-                        "time.py"
-                    ]
-                },
-                "Examples/Utils/B.py": {
-                    "name": "B",
-                    "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/B.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "Examples/Utils",
-                    "dependencies": [
-                        "Examples/Utils/C.py",
                         "cv2.py",
-                        "matplotlib.py"
+                        "numpy.py"
                     ]
                 },
-                "Examples/Utils/C.py": {
-                    "name": "C",
-                    "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/C.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "Examples/Utils",
+                "Image.py": {
+                    "name": "Image",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
                     "dependencies": []
                 },
-                "Examples/Utils/Haha/A.py": {
-                    "name": "A",
+                "ImageClip.py": {
+                    "name": "ImageClip",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "PaddingLibrary.py": {
+                    "name": "PaddingLibrary",
                     "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/Haha/A.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "Examples/Utils/Haha",
+                    "link": "https://github.com/KausikN/AnimASCII/blob/master/PaddingLibrary.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "Utils/VideoUtils.py": {
+                    "name": "VideoUtils",
+                    "type": "local",
+                    "link": "https://github.com/KausikN/AnimASCII/blob/master/Utils/VideoUtils.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
+                    "sub_dir": "Utils",
                     "dependencies": [
+                        "Image.py",
+                        "ImageClip.py",
+                        "concatenate_videoclips.py",
+                        "cv2.py",
                         "matplotlib/pyplot.py",
                         "numpy.py",
-                        "os.py"
-                    ]
-                },
-                "Examples/Utils/__init__.py": {
-                    "name": "__init__",
-                    "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/Examples/Utils/__init__.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "Examples/Utils",
-                    "dependencies": []
-                },
-                "ModularFeatures.py": {
-                    "name": "ModularFeatures",
-                    "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeatures.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "",
-                    "dependencies": [
-                        "json.py",
-                        "os.py",
-                        "shutil.py"
-                    ]
-                },
-                "ModularFeaturesData/StreamlitGUI/Version_WithCache/app.py": {
-                    "name": "app",
-                    "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeaturesData/StreamlitGUI/Version_WithCache/app.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "ModularFeaturesData/StreamlitGUI/Version_WithCache",
-                    "dependencies": [
-                        "json.py",
-                        "os.py",
-                        "streamlit.py"
-                    ]
-                },
-                "ModularFeaturesData/StreamlitGUI/Version_WithoutCache/app.py": {
-                    "name": "app",
-                    "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/ModularFeaturesData/StreamlitGUI/Version_WithoutCache/app.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "ModularFeaturesData/StreamlitGUI/Version_WithoutCache",
-                    "dependencies": [
-                        "json.py",
-                        "os.py",
-                        "streamlit.py"
-                    ]
-                },
-                "PyVen.py": {
-                    "name": "PyVen",
-                    "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/PyVen.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "",
-                    "dependencies": [
-                        "ast.py",
-                        "functools.py",
-                        "importlib.py",
-                        "json.py",
-                        "multiprocessing.py",
                         "os.py",
                         "stqdm.py",
                         "tqdm.py"
                     ]
                 },
+                "VideoUtils.py": {
+                    "name": "VideoUtils",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
                 "app.py": {
                     "name": "app",
                     "type": "local",
-                    "link": "https://github.com/KausikN/PyVen/blob/master/app.py",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "link": "https://github.com/KausikN/AnimASCII/blob/master/app.py",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": [
-                        "*.py",
-                        "PyVen.py",
+                        "AnimASCII.py",
+                        "Fonts.py",
+                        "GeneratorLibrary.py",
+                        "PaddingLibrary.py",
+                        "VideoUtils.py",
+                        "cv2.py",
+                        "functools.py",
                         "json.py",
+                        "numpy.py",
                         "os.py",
-                        "streamlit.py"
+                        "streamlit.py",
+                        "time.py"
                     ]
                 },
-                "ast.py": {
-                    "name": "ast",
+                "art.py": {
+                    "name": "art",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
+                    "sub_dir": "",
+                    "dependencies": []
+                },
+                "concatenate_videoclips.py": {
+                    "name": "concatenate_videoclips",
+                    "type": "missing",
+                    "link": "",
+                    "parent_dir": "",
                     "sub_dir": "",
                     "dependencies": []
                 },
                 "cv2.py": {
                     "name": "cv2",
-                    "type": "missing",
+                    "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -475,15 +451,7 @@
                     "name": "functools",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "importlib.py": {
-                    "name": "importlib",
-                    "type": "inbuilt",
-                    "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -491,23 +459,7 @@
                     "name": "json",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "lognorm.py": {
-                    "name": "lognorm",
-                    "type": "missing",
-                    "link": "",
-                    "parent_dir": "",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "matplotlib.py": {
-                    "name": "matplotlib",
-                    "type": "inbuilt",
-                    "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -515,31 +467,15 @@
                     "name": "pyplot",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "matplotlib",
-                    "dependencies": []
-                },
-                "multiprocessing.py": {
-                    "name": "multiprocessing",
-                    "type": "inbuilt",
-                    "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "norm.py": {
-                    "name": "norm",
-                    "type": "missing",
-                    "link": "",
-                    "parent_dir": "",
-                    "sub_dir": "",
                     "dependencies": []
                 },
                 "numpy.py": {
                     "name": "numpy",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -547,31 +483,7 @@
                     "name": "os",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "pygame.py": {
-                    "name": "pygame",
-                    "type": "missing",
-                    "link": "",
-                    "parent_dir": "",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "random.py": {
-                    "name": "random",
-                    "type": "inbuilt",
-                    "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "shutil.py": {
-                    "name": "shutil",
-                    "type": "inbuilt",
-                    "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -579,7 +491,7 @@
                     "name": "stqdm",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -587,15 +499,7 @@
                     "name": "streamlit",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
-                    "sub_dir": "",
-                    "dependencies": []
-                },
-                "sys.py": {
-                    "name": "sys",
-                    "type": "inbuilt",
-                    "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -603,7 +507,7 @@
                     "name": "time",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": []
                 },
@@ -611,7 +515,7 @@
                     "name": "tqdm",
                     "type": "inbuilt",
                     "link": "",
-                    "parent_dir": "D:/Github Codes and Projects/Projects/_MetaProjects/PyVen",
+                    "parent_dir": "D:/Github Codes and Projects/Projects/AnimASCII",
                     "sub_dir": "",
                     "dependencies": []
                 }
